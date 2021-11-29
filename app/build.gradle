@@ -4,6 +4,18 @@ plugins {
     id 'jacoco'
 }
 
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+    jacoco.excludes = ['jdk.internal.*']
+
+    testLogging {
+        exceptionFormat "full"
+        events "skipped", "passed", "failed"
+        showStandardStreams true
+    }
+    finalizedBy(jacocoTestReport)
+}
+
 task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
 
     reports {
@@ -44,6 +56,12 @@ android {
         debug {
             testCoverageEnabled true
         }
+    }
+
+    tasks.withType(Test) {
+        jacoco.includeNoLocationClasses = true
+        jacoco.excludes = ['jdk.internal.*']
+        finalizedBy(jacocoTestReport)
     }
 
     testOptions {
