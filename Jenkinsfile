@@ -32,19 +32,12 @@ pipeline {
       }
     }
 
-      stage('Checkout') {
-          steps{
-            echo "------------>Checkout<------------"
-            checkout scm
-          }
-        }
-
 
     stage('Static Code Analysis') {
       steps{
-        echo '------------>Análisis de código estático<------------'
+        echo '------------>Análisis estático de código<------------'
         withSonarQubeEnv('Sonar') {
-            sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
+            sh "${tool name: 'SonarScanner-Mac', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
         }
       }
     } 
