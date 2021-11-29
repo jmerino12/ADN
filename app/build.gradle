@@ -4,37 +4,6 @@ plugins {
     id 'jacoco'
 }
 
-tasks.withType(Test) {
-    jacoco.includeNoLocationClasses = true
-    jacoco.excludes = ['jdk.internal.*']
-
-    testLogging {
-        exceptionFormat "full"
-        events "skipped", "passed", "failed"
-        showStandardStreams true
-    }
-    finalizedBy(jacocoTestReport)
-}
-
-task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
-
-    reports {
-        xml.enabled = true
-        html.enabled = true
-    }
-
-    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
-    def debugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
-    def mainSrc = "${project.projectDir}/src/main/java"
-
-    sourceDirectories.setFrom(files([mainSrc]))
-    classDirectories.setFrom(files([debugTree]))
-    executionData.setFrom(fileTree(dir: "$buildDir", includes: [
-            "jacoco/testDebugUnitTest.exec",
-            "outputs/code-coverage/connected/*coverage.ec"
-    ]))
-}
-
 android {
     compileSdk 31
 
@@ -53,25 +22,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-        debug {
-            testCoverageEnabled true
-        }
-    }
-
-    tasks.withType(Test) {
-        jacoco.includeNoLocationClasses = true
-        jacoco.excludes = ['jdk.internal.*']
-        finalizedBy(jacocoTestReport)
-    }
-
-    testOptions {
-        unitTests.all {
-            jacoco {
-                includeNoLocationClasses = true
-                excludes = ['jdk.internal.*']       //This line
-            }
-        }
-        unitTests.returnDefaultValues = true
     }
 
     compileOptions {
@@ -81,6 +31,45 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+}
+
+jacoco {
+    toolVersion = "$jacoco_version"
+}
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+    jacoco.excludes = ['jdk.internal.*']
+
+    testLogging {
+        exceptionFormat "full"
+        events "skipped", "passed", "failed"
+        showStandardStreams true
+    }
+    finalizedBy(jacocoTestReport)
+}
+
+task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+
+    def fileFilter = ['**/R.class',
+                      '**/R$*.class',
+                      '**/BuildConfig.*',
+                      '**/Manifest*.*',
+                      '**/*Test*.*',
+                      'android/**/*.*',
+                      '**/data/models/*']
+    def debugTree = fileTree(dir: "${buildDir}/build/intermediates/javac/debug", excludes: fileFilter)
+    def kotlinDebugTree = fileTree(dir: "${buildDir}/tmp/kotlin-classes/debug", excludes: fileFilter)
+    def mainSrc = "${project.projectDir}/src/main/java"
+
+    sourceDirectories.from(files([mainSrc]))
+    classDirectories.from(files([debugTree], [kotlinDebugTree]))
+    executionData.from(fileTree(dir: "$buildDir", includes: [
+            "jacoco/testDebugUnitTest.exec",
+            "outputs/code-coverage/connected/*coverage.ec"]))
 }
 
 dependencies {
