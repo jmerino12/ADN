@@ -8,3 +8,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "ADN"
 include ':app'
+include ':domain'
+include ':data'
+include ':usecases'
