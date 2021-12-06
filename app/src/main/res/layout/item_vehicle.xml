@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/containerMain"
+    android:layout_width="match_parent"
+    android:layout_height="88dp"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:paddingTop="16dp"
+    app:cardUseCompatPadding="true">
+
+    <ImageView
+        android:id="@+id/imgFoto"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_bike" />
+
+
+    <Button
+        android:id="@+id/tvOrden"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="16dp"
+        android:drawableBottom="@drawable/ic_exit"
+        android:gravity="center"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/placa"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_toStartOf="@+id/tvOrden"
+        android:layout_toEndOf="@id/imgFoto"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@id/tvOrden"
+        app:layout_constraintStart_toEndOf="@id/imgFoto"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="HGL000" />
+
+    <TextView
+        android:id="@+id/horaEntrada"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_toStartOf="@+id/tvOrden"
+        android:layout_toEndOf="@id/imgFoto"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@id/tvOrden"
+        app:layout_constraintStart_toEndOf="@id/imgFoto"
+        app:layout_constraintTop_toBottomOf="@id/placa"
+        tools:text="2020.11.01 9:34" />
+
+    <TextView
+        android:id="@+id/cilindraje"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_toStartOf="@+id/tvOrden"
+        android:layout_toEndOf="@id/imgFoto"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toStartOf="@id/tvOrden"
+        app:layout_constraintStart_toEndOf="@id/imgFoto"
+        app:layout_constraintTop_toBottomOf="@id/horaEntrada"
+        tools:text="400 CC" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#1E000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/horaEntrada" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

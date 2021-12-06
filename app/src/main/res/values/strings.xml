@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ADN</string>
+    <string name="parking_lot">Parking Lot</string>
+    <string name="placa_del_vehiculo">Placa del vehiculo</string>
+    <string name="agregarVehiculo">agregar vehiculo</string>
+    <string name="cilindraje">Cilindraje</string>
 </resources>
