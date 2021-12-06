@@ -45,7 +45,6 @@ abstract class Vehicle(
     }
 
     private fun dayDeniedToEnter(date: Long): Boolean {
-        val day = SimpleDateFormat("EEEE", Locale.getDefault()).format(date)
         return when (SimpleDateFormat("EEEE", Locale.getDefault()).format(date)) {
             "domingo" -> true
             "lunes" -> true
