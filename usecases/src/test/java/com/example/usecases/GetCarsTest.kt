@@ -20,9 +20,7 @@ class GetCarsTest {
     @Mock
     private lateinit var carRepository: CarRepository
 
-    lateinit var getCars: GetCars
-
-
+    private lateinit var getCars: GetCars
 
     @Before
     fun setUp() {

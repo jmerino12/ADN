@@ -54,5 +54,15 @@ class CarTest {
         }
     }
 
-
+    @Test
+    fun validateInitialLetterA_CarSunday_createObject() {
+        //ARRANGE
+        val offSetDateTime = OffsetDateTime.now()
+        val date = LocalDateTime.of(2021, Month.DECEMBER, 5, 5, 0).toInstant(offSetDateTime.offset)
+            .toEpochMilli()
+        //ACT
+        val car = Car(licencePlate = "AAA572", dateEnter = date)
+        //ASSERT
+        assertNotNull(car)
+    }
 }

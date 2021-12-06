@@ -45,7 +45,7 @@ abstract class Vehicle(
     }
 
     private fun dayDeniedToEnter(date: Long): Boolean {
-        return when (SimpleDateFormat("EEEE", Locale.getDefault()).format(date)) {
+        return when (SimpleDateFormat("EEEE", Locale.forLanguageTag("es")).format(date)) {
             "domingo" -> true
             "lunes" -> true
             else -> {
