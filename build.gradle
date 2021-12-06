@@ -1,7 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext {
-
         jacoco_version = "0.8.7"
         junit_version = "4.13.2"
         androidXCore_version = "1.7.0"
@@ -9,9 +8,9 @@ buildscript {
         material_version = "1.4.0"
         constraintLayout_version = "2.1.1"
         room_version = "2.3.0"
-        dagger_version = "2.32"
+        dagger_version = "2.40.4"
         viewModel_version = "2.4.0"
-        kotlinCoroutines_version ="1.5.2"
+        kotlinCoroutines_version = "1.5.2"
         liveData_version = "2.4.0"
 
         androidLibs = [
@@ -22,8 +21,8 @@ buildscript {
                 roomRuntime     : "androidx.room:room-runtime:$room_version",
                 roomKtx         : "androidx.room:room-ktx:$room_version",
                 dagger          : "com.google.dagger:dagger:$dagger_version",
-                viewModel : "androidx.lifecycle:lifecycle-viewmodel-ktx:$viewModel_version",
-                liveData :   "androidx.lifecycle:lifecycle-livedata-ktx:$liveData_version"
+                viewModel       : "androidx.lifecycle:lifecycle-viewmodel-ktx:$viewModel_version",
+                liveData        : "androidx.lifecycle:lifecycle-livedata-ktx:$liveData_version"
 
         ]
 
@@ -33,12 +32,9 @@ buildscript {
         ]
 
         testLibs = [
-                junit: "junit:junit:$junit_version",
-                mockitoInline  : "org.mockito:mockito-inline:2.28.2",
-                mockitoCore    : 'org.mockito:mockito-core:3.12.4',
-                mockitoAndroid : 'org.mockito:mockito-android:3.8.0',
-                corutinasKotlin: "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1",
-                koinTest       : "io.insert-koin:koin-test:3.0.2",
+                junit      : "junit:junit:$junit_version",
+                mockitoCore: 'org.mockito:mockito-core:3.12.4',
+                mockitoInline: 'org.mockito:mockito-inline:2.28.2'
         ]
 
         androidTestLibs = [
@@ -57,9 +53,43 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:7.0.3"
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.0'
-        classpath "org.jacoco:org.jacoco.core:0.8.6"
+        classpath "org.jacoco:org.jacoco.core:0.8.7"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+    }
+}
+allprojects {
+    apply plugin: 'jacoco'
+}
+
+apply plugin: 'jacoco'
+
+jacoco {
+    toolVersion = jacoco_version
+}
+
+task jacocoFullReport(type: JacocoReport, group: 'Coverage reports') {
+    group = 'Verification'
+    description = 'Generate Jacoco aggregate report for all modules'
+
+    def projects = subprojects.findAll { it.getTasksByName("jacocoTestReport", false) }
+
+    //noinspection GrUnresolvedAccess
+    dependsOn(projects.jacocoTestReport)
+
+    final source = files(projects.jacocoTestReport.sourceDirectories)
+
+    additionalSourceDirs.setFrom source
+    sourceDirectories.setFrom source
+
+    classDirectories.setFrom files(projects.jacocoTestReport.classDirectories)
+    executionData.setFrom files(projects.jacocoTestReport.executionData)
+
+    reports {
+        html {
+            enabled true
+            destination file("${buildDir}/reports/jacoco/html")
+        }
     }
 }
 

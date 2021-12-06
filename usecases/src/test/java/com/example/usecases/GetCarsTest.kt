@@ -2,7 +2,6 @@ package com.example.usecases
 
 import com.example.data.repository.CarRepository
 import com.example.domain.entities.Car
-import com.example.testshared.mockedCar
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -21,6 +20,8 @@ class GetCarsTest {
     private lateinit var carRepository: CarRepository
 
     lateinit var getCars: GetCars
+
+    private val mockedCar = Car("BBB545", dateEnter = System.currentTimeMillis())
 
     @Before
     fun setUp() {

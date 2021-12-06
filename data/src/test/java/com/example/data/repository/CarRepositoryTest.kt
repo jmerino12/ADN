@@ -1,7 +1,7 @@
 package com.example.data.repository
 
 import com.example.data.source.LocalDataSource
-import com.example.testshared.mockedCar
+import com.example.domain.entities.Car
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -23,6 +23,8 @@ class CarRepositoryTest {
     fun setUp() {
         carRepository = CarRepository(localDataSource)
     }
+
+    private val mockedCar = Car("BBB545", dateEnter = System.currentTimeMillis())
 
     @Test
     fun getListCar() = runBlocking {

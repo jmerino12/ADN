@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun listenerRadioButton() {
-        binding.vehicleGroup.setOnCheckedChangeListener { group, checkedId ->
+        binding.vehicleGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.rbtnMotorcycle -> {
                     rButtonMotorcycle = true
@@ -119,7 +119,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun addCar() {
         try {
-            viewModelCar.saveCar(Car(binding.etPlaca.text.toString()))
+            viewModelCar.saveCar(
+                Car(
+                    binding.etPlaca.text.toString(),
+                    dateEnter = System.currentTimeMillis()
+                )
+            )
         } catch (e: Exception) {
             val errorDialog =
                 dialogFactory.getDialog(this, MessageFactory.TYPE_ERROR, e.message!!)
@@ -132,7 +137,8 @@ class MainActivity : AppCompatActivity() {
             viewModelMotorcycle.saveMotorcycle(
                 Motorcycle(
                     binding.etPlaca.text.toString(),
-                    binding.etCilindraje.text.toString().toDouble()
+                    binding.etCilindraje.text.toString().toDouble(),
+                    dateEnter = System.currentTimeMillis()
                 )
             )
         } catch (e: Exception) {
