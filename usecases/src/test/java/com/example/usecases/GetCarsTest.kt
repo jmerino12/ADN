@@ -22,7 +22,7 @@ class GetCarsTest {
 
     lateinit var getCars: GetCars
 
-    private val mockedCar = Car("BBB545", dateEnter = System.currentTimeMillis())
+
 
     @Before
     fun setUp() {
@@ -35,7 +35,7 @@ class GetCarsTest {
         val offSetDateTime = OffsetDateTime.now()
         val date = LocalDateTime.of(2021, Month.DECEMBER, 5, 13, 0).toInstant(offSetDateTime.offset)
             .toEpochMilli()
-        val cars = listOf(mockedCar, Car(licencePlate = "AFH328", dateEnter = date))
+        val cars = listOf(Car(licencePlate = "AFH328", dateEnter = date))
         //Act
         Mockito.`when`(carRepository.getCars()).thenReturn(cars)
         val result = getCars.invoke()
