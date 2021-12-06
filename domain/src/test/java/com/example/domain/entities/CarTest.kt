@@ -7,7 +7,6 @@ import org.junit.Test
 import java.time.LocalDateTime
 import java.time.Month
 import java.time.OffsetDateTime
-import java.util.*
 
 
 class CarTest {
@@ -58,11 +57,11 @@ class CarTest {
     @Test
     fun validateInitialLetterA_CarSunday_createObject() {
         //ARRANGE
-        // val offSetDateTime = OffsetDateTime.now()
-        val date = Date(2020, 12, 5) /*LocalDateTime.of(2021, Month.DECEMBER, 5, 5, 0).toInstant(offSetDateTime.offset)
-            .toEpochMilli()*/
+        val offSetDateTime = OffsetDateTime.now()
+        val date = LocalDateTime.of(2021, Month.DECEMBER, 5, 5, 0).toInstant(offSetDateTime.offset)
+            .toEpochMilli()
         //ACT
-        val car = Car(licencePlate = "AAA572", dateEnter = date.time)
+        val car = Car(licencePlate = "AAA572", dateEnter = date)
         //ASSERT
         assertNotNull(car)
     }
