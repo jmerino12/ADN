@@ -2,6 +2,7 @@ package com.example.usecases
 
 import com.example.data.repository.CarRepository
 import com.example.domain.entities.Car
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -29,7 +30,7 @@ class GetCarsTest {
     }
 
     @Test
-    fun invoke_getListOfCar() = runBlocking {
+    fun invoke_getListOfCar() = runBlocking(Dispatchers.IO) {
         //Arrange
         val offSetDateTime = OffsetDateTime.now()
         val date = LocalDateTime.of(2021, Month.DECEMBER, 5, 13, 0).toInstant(offSetDateTime.offset)
