@@ -28,7 +28,7 @@ pipeline {
         echo "------------>Unit Tests<------------"
         sh './gradlew clean'
         sh './gradlew test'
-        sh './gradlew jacocoFullReport'
+        sh './gradlew jacocoTestReport'
       }
     }
 
@@ -49,7 +49,7 @@ pipeline {
     }
     success {
       echo 'This will run only if successful'
-      junit 'domain/build/test-results/test/*.xml'
+      junit 'domain/build/test-results/testDebugUnitTest/*.xml'
     }
     failure {
       echo 'This will run only if failed'
