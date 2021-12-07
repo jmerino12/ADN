@@ -6,20 +6,6 @@ java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
 }
-jacocoTestReport {
-    dependsOn(test)
-
-    afterEvaluate {
-        classDirectories.setFrom classDirectories.files.collect {
-            fileTree(dir: it)
-        }
-    }
-
-    reports {
-        xml.enabled = true
-        html.enabled = true
-    }
-}
 
 dependencies {
     implementation project(":domain")
