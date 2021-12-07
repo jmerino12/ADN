@@ -43,7 +43,7 @@ jacoco {
 }
 
 
-task jacocoTestReport(type: JacocoReport, dependsOn: [':domain:test','testDebugUnitTest']) {
+/*task jacocoTestReport(type: JacocoReport, dependsOn: [':domain:test','createDebugCoverageReport']) {
     reports {
         xml.enabled  true
         html.enabled  true
@@ -58,7 +58,6 @@ task jacocoTestReport(type: JacocoReport, dependsOn: [':domain:test','testDebugU
             includes: ["outputs/code_coverage/debugAndroidTest/connected/**coverage.ec"]
     )
 
-
     def executionFileForUnitTestInModule = "$buildDir/outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec"
 
     def executionFileForUnitTestInOtherModule = "$domainProject.buildDir/jacoco/test.exec"
@@ -72,7 +71,39 @@ task jacocoTestReport(type: JacocoReport, dependsOn: [':domain:test','testDebugU
     classDirectories.setFrom(files([kotlinDebugTree.asFileTree]))
     executionData.setFrom(executionFiles.asFileTree)
 
+}*/
+
+task jacocoTestReport(type: JacocoReport, dependsOn: [':domain:test','testDebugUnitTest']) {
+    reports {
+        xml.enabled true
+        html.enabled true
+    }
+
+    def fileFilter = ['**/R.class',
+                      '**/R$*.class',
+                      '**/BuildConfig.*',
+                      '**/Manifest*.*',
+                      '**/*Test*.*',
+                      'android/**/*.*',
+                      '**/data/models/*']
+
+    def domainProject = project(':domain')
+    def kotlinDebugTreeDomain = fileTree(dir: "$domainProject.buildDir/classes/koltin", excludes: fileFilter)
+    def mainSrcDomain = "$domainProject.projectDir/src/main/java"
+
+
+    def kotlinDebugTree = fileTree(dir: "${buildDir}/tmp/kotlin-classes/debug", excludes: fileFilter)
+    def mainSrc = "${project.projectDir}/src/main/java"
+
+    sourceDirectories.setFrom(files([mainSrc, mainSrcDomain]))
+    classDirectories.setFrom(files([kotlinDebugTree, kotlinDebugTreeDomain]))
+    executionData.setFrom(fileTree(dir: "$buildDir", includes: [
+            "/outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec",
+            "jacoco/test.exec",
+            "outputs/code-coverage/connected/*coverage.ec"
+    ]))
 }
+
 
 subprojects {
     configurations.all {
