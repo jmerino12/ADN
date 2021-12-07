@@ -6,18 +6,11 @@ plugins {
 jacocoTestReport {
     dependsOn(test)
 
-    afterEvaluate {
-        classDirectories.setFrom classDirectories.files.collect {
-            fileTree(dir: it)
-        }
+    reports {
+        xml.enabled true
+        html.enabled true
     }
 
-    reports {
-        reports {
-            xml.enabled  true
-            html.enabled  true
-        }
-    }
 }
 java {
     sourceCompatibility = JavaVersion.VERSION_1_7

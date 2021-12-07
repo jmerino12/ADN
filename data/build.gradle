@@ -7,6 +7,16 @@ java {
     targetCompatibility = JavaVersion.VERSION_1_8
 }
 
+jacocoTestReport {
+    dependsOn(test)
+
+    reports {
+        xml.enabled true
+        html.enabled true
+    }
+
+}
+
 dependencies {
     implementation project(":domain")
     implementation kotlinLibs.values()
