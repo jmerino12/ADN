@@ -9,8 +9,8 @@ import kotlin.math.abs
 
 
 abstract class Vehicle(
-    val licencePlate: String,
-    val cylinderCapacity: Double,
+    private val licencePlate: String,
+    private val cylinderCapacity: Double,
     val dateEnter: Long,
     private val dateExit: Long
 ) {
