@@ -29,7 +29,7 @@ abstract class Vehicle(
 
     }
 
-    private fun validateLicencePlate(): Boolean {
+    fun validateLicencePlate(): Boolean {
         return (Pattern.matches("^[A-Z]{3}+[0-9]{2}[a-zA-Z0-9]\$", this.licencePlate.uppercase()))
     }
 
