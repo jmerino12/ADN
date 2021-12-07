@@ -5,13 +5,6 @@ plugins {
 }
 android {
     compileSdk 31
-    /*packagingOptions {
-        pickFirst 'META-INF/AL2.0'
-        pickFirst 'META-INF/LGPL2.1'
-        pickFirst("win32-x86/attach_hotspot_windows.dll")
-        pickFirst("win32-x86-64/attach_hotspot_windows.dll")
-        pickFirst("META-INF/licenses/ASM")
-    }*/
     defaultConfig {
         applicationId "com.example.adn"
         minSdk 21
@@ -50,7 +43,7 @@ jacoco {
 }
 
 
-task jacocoTestReport(type: JacocoReport, dependsOn: [':domain:test','connectedAndroidTest']) {
+task jacocoTestReport(type: JacocoReport, dependsOn: [':domain:test','testDebugUnitTest']) {
     reports {
         xml.enabled  true
         html.enabled  true
