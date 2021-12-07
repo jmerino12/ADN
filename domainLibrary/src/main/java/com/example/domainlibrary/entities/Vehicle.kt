@@ -67,7 +67,7 @@ abstract class Vehicle(
     abstract fun payParking(): Double
 
 
-    fun calculatePaymentParking(): String {
+    fun calculatePaymentParking(valuePerDay: Double, valuePerHour: Double): Double {
         var getHours = diffToHour()
         var daysToPay = 0L
         var hoursToPay = 0L
@@ -80,6 +80,6 @@ abstract class Vehicle(
         } else {
             hoursToPay = getHours
         }
-        return "$daysToPay,$hoursToPay"
+        return (daysToPay * valuePerDay) + (hoursToPay * valuePerHour)
     }
 }

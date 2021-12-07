@@ -13,12 +13,14 @@ class Motorcycle(
 
 
     override fun payParking(): Double {
-        val days = calculatePaymentParking().split(",")[0].toDouble()
-        val hours = calculatePaymentParking().split(",")[1].toDouble()
+        var totalToPay = calculatePaymentParking(
+            PriceValues.VALUE_DAY_MOTORCYCLE,
+            PriceValues.VALUE_HOUR_MOTORCYCLE
+        )
         return if (isCylinderCapacityMore500()) {
-            (PriceValues.VALUE_DAY_MOTORCYCLE * days) + (hours * PriceValues.VALUE_HOUR_MOTORCYCLE) + 2000
+            totalToPay + 2000
         } else {
-            (PriceValues.VALUE_DAY_MOTORCYCLE * days) + (hours * PriceValues.VALUE_HOUR_MOTORCYCLE)
+            totalToPay
         }
     }
 

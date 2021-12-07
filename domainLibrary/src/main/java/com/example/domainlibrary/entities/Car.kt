@@ -13,9 +13,7 @@ class Car(
     Vehicle(licencePlate, cylinderCapacity, dateEnter, dateExit) {
 
     override fun payParking(): Double {
-        val days = calculatePaymentParking().split(",")[0].toDouble()
-        val hours = calculatePaymentParking().split(",")[1].toDouble()
-        return (VALUE_DAY_CAR * days) + (hours * VALUE_HOUR_CAR)
+        return calculatePaymentParking(VALUE_DAY_CAR, VALUE_HOUR_CAR)
     }
 
 }
