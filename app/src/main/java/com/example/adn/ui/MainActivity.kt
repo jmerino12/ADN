@@ -41,10 +41,10 @@ class MainActivity : AppCompatActivity() {
             addVehicle()
         }
 
-        viewModelMotorcycle.getListMotorCycle().observe(this, {
+        viewModelMotorcycle.motorcycle.observe(this, {
             listVehicles.addAll(it)
         })
-        viewModelCar.getListCar().observe(this, {
+        viewModelCar.cars.observe(this, {
             listVehicles.addAll(it)
         })
 

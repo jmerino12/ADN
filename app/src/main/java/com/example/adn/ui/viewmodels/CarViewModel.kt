@@ -1,11 +1,15 @@
 package com.example.adn.ui.viewmodels
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
 import com.example.domain.entities.Car
 import com.example.usecases.GetCars
 import com.example.usecases.SaveCar
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class CarViewModel(
     private val getCars: GetCars,
@@ -15,20 +19,22 @@ class CarViewModel(
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    fun getListCar() = liveData(Dispatchers.IO) {
-        emit(getCars.invoke())
+    private val _cars = MutableLiveData<List<Car>>()
+    val cars: LiveData<List<Car>> get() = _cars
+
+    fun getListCar() {
+        uiScope.launch {
+            _cars.value = getCars.invoke()
+        }
     }
 
     fun saveCar(car: Car) {
         uiScope.launch {
             saveCar.invoke(car)
-            delay(2000)
-            getListCar()
         }
     }
 
     override fun onCleared() {
-        uiScope.cancel()
         viewModelJob.cancel()
         super.onCleared()
     }
