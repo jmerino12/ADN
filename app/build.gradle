@@ -50,7 +50,7 @@ jacoco {
 }
 
 
-task jacocoTestReport(type: JacocoReport, dependsOn: [':domain:test','testDebugUnitTest']) {
+task jacocoTestReport(type: JacocoReport, dependsOn: [':domain:test','connectedAndroidTest']) {
     reports {
         xml.enabled  true
         html.enabled  true
