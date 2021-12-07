@@ -8,7 +8,7 @@ class Car(
     licencePlate: String,
     cylinderCapacity: Double = 0.0,
     dateEnter: Long,
-    dateExit: Long = dateEnter
+    dateExit: Long = 0
 ) :
     Vehicle(licencePlate, cylinderCapacity, dateEnter, dateExit) {
 

@@ -19,7 +19,7 @@ class CarTest {
         val date = LocalDateTime.of(2021, Month.DECEMBER, 7, 13, 0).toInstant(offSetDateTime.offset)
             .toEpochMilli()
         // ACT
-        val car = Car(licencePlate = licensePLate, dateEnter = date)
+        val car = Car(licencePlate = licensePLate, dateEnter = date, dateExit = 0)
         assertNotNull(car)
     }
 
@@ -32,7 +32,8 @@ class CarTest {
             .toEpochMilli()
         // ACT
         try {
-            val car = Car(licencePlate = licensePLate, dateEnter = date)
+            val car = Car(licencePlate = licensePLate, dateEnter = date, dateExit = 0)
+            car.dateEnter
         } catch (e: InvalidDataException) {
             //Assert
             assertEquals("No tiene el estandar de la placa", e.message)
@@ -47,7 +48,8 @@ class CarTest {
             .toEpochMilli()
         // ACT
         try {
-            val car = Car(licencePlate = "AAA572", dateEnter = date)
+            val car = Car(licencePlate = "AAA572", dateEnter = date, dateExit = 0)
+            car.dateEnter
         } catch (e: InvalidDataException) {
             //ASSERT
             assertEquals("No tiene permitido el ingreso", e.message)
@@ -61,7 +63,7 @@ class CarTest {
         val date = LocalDateTime.of(2021, Month.DECEMBER, 5, 5, 0).toInstant(offSetDateTime.offset)
             .toEpochMilli()
         //ACT
-        val car = Car(licencePlate = "AAA572", dateEnter = date)
+        val car = Car(licencePlate = "AAA572", dateEnter = date, dateExit = 0)
         //ASSERT
         assertNotNull(car)
     }

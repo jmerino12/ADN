@@ -3,6 +3,7 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.7">
       <module name="ADN.app" target="11" />
+      <module name="ADN.data" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -15,7 +15,7 @@ fun Car.toRoomVehicle(): CarRoom = CarRoom(
 fun CarRoom.toDomain(): Car = Car(
     licencePlate = licencePlate,
     cylinderCapacity = cylinderCapacity,
-    dateEnter = dateEnter
+    dateEnter = dateEnter,
 )
 
 fun Motorcycle.toRoomVehicle(): MotorCyclerRoom = MotorCyclerRoom(

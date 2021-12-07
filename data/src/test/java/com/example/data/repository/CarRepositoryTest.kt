@@ -24,7 +24,7 @@ class CarRepositoryTest {
         carRepository = CarRepository(localDataSource)
     }
 
-    private val mockedCar = Car("BBB545", dateEnter = System.currentTimeMillis())
+    private val mockedCar = Car("BBB545", dateEnter = System.currentTimeMillis(), dateExit = 0)
 
     @Test
     fun getListCar() = runBlocking {

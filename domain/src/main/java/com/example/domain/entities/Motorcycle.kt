@@ -7,7 +7,7 @@ class Motorcycle(
     licencePlate: String,
     cylinderCapacity: Double,
     dateEnter: Long,
-    dateExit: Long = dateEnter
+    dateExit: Long = 0
 ) :
     Vehicle(licencePlate, cylinderCapacity, dateEnter, dateExit) {
 

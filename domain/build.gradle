@@ -2,13 +2,6 @@ plugins {
     id 'java-library'
     id 'kotlin'
 }
-jacoco {
-    toolVersion = jacoco_version
-}
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_7
-    targetCompatibility = JavaVersion.VERSION_1_7
-}
 jacocoTestReport {
     dependsOn(test)
 
@@ -19,12 +12,11 @@ jacocoTestReport {
     }
 
     reports {
-        html{
-            enabled true
-            destination file("${buildDir}/reports/jacoco/html")
-        }
+        xml.enabled = true
+        html.enabled = true
     }
 }
+
 java {
     sourceCompatibility = JavaVersion.VERSION_1_7
     targetCompatibility = JavaVersion.VERSION_1_7

@@ -62,37 +62,6 @@ allprojects {
     apply plugin: 'jacoco'
 }
 
-apply plugin: 'jacoco'
-
-jacoco {
-    toolVersion = jacoco_version
-}
-
-task jacocoFullReport(type: JacocoReport, group: 'Coverage reports') {
-    group = 'Verification'
-    description = 'Generate Jacoco aggregate report for all modules'
-
-    def projects = subprojects.findAll { it.getTasksByName("jacocoTestReport", false) }
-
-    //noinspection GrUnresolvedAccess
-    dependsOn(projects.jacocoTestReport)
-
-    final source = files(projects.jacocoTestReport.sourceDirectories)
-
-    additionalSourceDirs.setFrom source
-    sourceDirectories.setFrom source
-
-    classDirectories.setFrom files(projects.jacocoTestReport.classDirectories)
-    executionData.setFrom files(projects.jacocoTestReport.executionData)
-
-    reports {
-        html {
-            enabled true
-            destination file("${buildDir}/reports/jacoco/html")
-        }
-    }
-}
-
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

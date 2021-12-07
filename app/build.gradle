@@ -44,17 +44,7 @@ android {
 jacoco {
     toolVersion = "$jacoco_version"
 }
-tasks.withType(Test) {
-    jacoco.includeNoLocationClasses = true
-    jacoco.excludes = ['jdk.internal.*']
 
-    testLogging {
-        exceptionFormat "full"
-        events "skipped", "passed", "failed"
-        showStandardStreams true
-    }
-    finalizedBy(jacocoTestReport)
-}
 
 task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
     reports {
@@ -62,23 +52,33 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
         html.enabled = true
     }
 
-    def fileFilter = ['**/R.class',
-                      '**/R$*.class',
-                      '**/BuildConfig.*',
-                      '**/Manifest*.*',
-                      '**/*Test*.*',
-                      'android/**/*.*',
-                      '**/data/models/*']
+    def myModule = project(':domain')
 
-    def debugTree = fileTree(dir: "${buildDir}/build/intermediates/javac/debug", excludes: fileFilter)
-    def kotlinDebugTree = fileTree(dir: "${buildDir}/tmp/kotlin-classes/debug", excludes: fileFilter)
-    def mainSrc = "${project.projectDir}/src/main/java"
+    def kotlinDebugTree = layout.files("${buildDir}/tmp/kotlin-classes/debug", "$myModule.buildDir/tmp/kotlin-classes/debug")
+    def mainSrc = layout.files("${project.projectDir}/src/main/java", "$myModule.projectDir/src/main/java")
 
-    sourceDirectories.from(files([mainSrc]))
-    classDirectories.from(files([debugTree], [kotlinDebugTree]))
+    def executionFilesFromConnectedAndroidTest = fileTree(
+            dir: "$buildDir",
+            includes: ["outputs/code-coverage/connected/*coverage.ec", "jacoco/testDebugUnitTest.exec"])
+
+    def executionFileForUnitTestInModule = "$buildDir/jacoco/testDebugUnitTest.exec"
+
+    def executionFileForUnitTestInOtherModule = "$myModule.buildDir/jacoco/testDebugUnitTest.exec"
+
+    def executionFiles = layout.files(
+            executionFilesFromConnectedAndroidTest,
+            executionFileForUnitTestInModule,
+            executionFileForUnitTestInOtherModule
+    )
+    sourceDirectories.setFrom(files([mainSrc]))
+    classDirectories.setFrom(files([kotlinDebugTree.asFileTree]))
+    executionData.setFrom(executionFiles.asFileTree)
+
+    /*sourceDirectories.setFrom(files([mainSrc]))
+    classDirectories.setFrom(files([debugTree], [kotlinDebugTree]))
     executionData.from(fileTree(dir: "$buildDir", includes: [
             "jacoco/testDebugUnitTest.exec",
-            "outputs/code-coverage/connected/*coverage.ec"]))
+            "outputs/code-coverage/connected/*coverage.ec"]))*/
 }
 
 dependencies {

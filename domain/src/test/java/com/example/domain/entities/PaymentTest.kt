@@ -10,7 +10,7 @@ import java.time.OffsetDateTime
 private const val DELTA: Double = 1e-15
 
 class PaymentTest {
-    //nombreMetodo_situacion_resultadoEsperado (CAMEL CASE)
+
     @Test
     fun parkingPayment_motorcycleCylinderUnder500Per27Hours() {
         //Arrange

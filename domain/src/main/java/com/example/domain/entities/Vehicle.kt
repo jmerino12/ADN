@@ -12,19 +12,19 @@ abstract class Vehicle(
     val licencePlate: String,
     val cylinderCapacity: Double,
     val dateEnter: Long,
-    private val dateExit: Long = dateEnter
+    private val dateExit: Long
 ) {
 
     init {
-        if (dateEnter == dateExit) {
-            if (!validateLicencePlate()) {
-                throw InvalidDataException("No tiene el estandar de la placa")
-            }
 
-            if (!canEnter(dateEnter)) {
-                throw InvalidDataException("No tiene permitido el ingreso")
-            }
+        if (!validateLicencePlate()) {
+            throw InvalidDataException("No tiene el estandar de la placa")
         }
+
+        if (!canEnter(dateEnter)) {
+            throw InvalidDataException("No tiene permitido el ingreso")
+        }
+
 
     }
 
