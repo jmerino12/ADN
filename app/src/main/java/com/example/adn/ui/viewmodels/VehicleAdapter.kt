@@ -14,16 +14,13 @@ import com.example.domainlibrary.entities.Car
 import com.example.domainlibrary.entities.Motorcycle
 import com.example.domainlibrary.entities.Vehicle
 
+const val VIEW_TYPE_CAR = 1
+const val VIEW_TYPE_MOTORCYCLE = 2
 
 class VehicleAdapter : ListAdapter<Vehicle, BaseViewHolder<*>>(
     VehicleDiffCallback
 ) {
 
-    private lateinit var items: List<Vehicle>
-
-    fun setList(list: List<Vehicle>) {
-        items = list
-    }
 
     companion object {
         private val VehicleDiffCallback = object : DiffUtil.ItemCallback<Vehicle>() {
@@ -40,7 +37,7 @@ class VehicleAdapter : ListAdapter<Vehicle, BaseViewHolder<*>>(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
         when (viewType) {
-            1 -> {
+            VIEW_TYPE_CAR -> {
                 val viewBinding =
                     ItemVehicleBinding.inflate(
                         LayoutInflater.from(parent.context),
@@ -49,7 +46,7 @@ class VehicleAdapter : ListAdapter<Vehicle, BaseViewHolder<*>>(
                     )
                 return CarViewHolder(viewBinding)
             }
-            2 -> {
+            VIEW_TYPE_MOTORCYCLE -> {
                 val viewBinding =
                     ItemVehicleBinding.inflate(
                         LayoutInflater.from(parent.context),
@@ -66,10 +63,10 @@ class VehicleAdapter : ListAdapter<Vehicle, BaseViewHolder<*>>(
     override fun onBindViewHolder(holder: BaseViewHolder<*>, position: Int) {
         when (holder) {
             is CarViewHolder -> {
-                holder.bind(items[position], position)
+                holder.bind(getItem(position), position)
             }
             is MotorcycleViewHolder -> {
-                holder.bind(items[position], position)
+                holder.bind(getItem(position), position)
             }
             else -> {
                 throw RuntimeException("ViewType no declarado ")
@@ -78,12 +75,12 @@ class VehicleAdapter : ListAdapter<Vehicle, BaseViewHolder<*>>(
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when (items[position]) {
+        return when (getItem(position)) {
             is Car -> {
-                1
+                VIEW_TYPE_CAR
             }
             is Motorcycle -> {
-                2
+                VIEW_TYPE_MOTORCYCLE
             }
             else -> {
                 throw RuntimeException("ViewType no declarado")
