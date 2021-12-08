@@ -54,8 +54,7 @@ class CarTest {
             .toEpochMilli()
         // ACT
         try {
-            val car = Car(licencePlate = licensePLate, dateEnter = date, dateExit = 0)
-            car.validateLicencePlate()
+            Car(licencePlate = licensePLate, dateEnter = date, dateExit = 0)
         } catch (e: InvalidDataException) {
             //Assert
             assertEquals("No tiene el estandar de la placa", e.message)

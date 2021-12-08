@@ -10,8 +10,8 @@ import kotlin.math.abs
 
 
 abstract class Vehicle(
-    private val licencePlate: String,
-    private val cylinderCapacity: Double,
+    val licencePlate: String,
+    val cylinderCapacity: Double,
     val dateEnter: Long,
     private val dateExit: Long
 ) {
@@ -29,7 +29,7 @@ abstract class Vehicle(
 
     }
 
-    fun validateLicencePlate(): Boolean {
+    private fun validateLicencePlate(): Boolean {
         return (Pattern.matches("^[A-Z]{3}+[0-9]{2}[a-zA-Z0-9]\$", this.licencePlate.uppercase()))
     }
 
