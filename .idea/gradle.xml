@@ -13,8 +13,8 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/dataLibrary" />
-            <option value="$PROJECT_DIR$/domainLibrary" />
-            <option value="$PROJECT_DIR$/usecasesLibrary" />
+            <option value="$PROJECT_DIR$/domain" />
+            <option value="$PROJECT_DIR$/usecases" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
