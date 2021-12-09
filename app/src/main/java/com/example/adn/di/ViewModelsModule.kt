@@ -3,18 +3,15 @@ package com.example.adn.di
 
 import com.example.adn.ui.viewmodels.CarViewModel
 import com.example.adn.ui.viewmodels.MotorcycleViewModel
-import com.example.domain.services.CarService
-import com.example.usecases.GetMotorcycles
-import com.example.usecases.PayMotorcycleParking
-import com.example.usecases.SaveMotorcycle
+import com.example.usecases.*
 import dagger.Module
 import dagger.Provides
 
 @Module
 class ViewModelsModule {
     @Provides
-    fun carViewModelProvider(carService: CarService) =
-        CarViewModel(carService)
+    fun carViewModelProvider(getCars: GetCars, saveCar: SaveCar, payCarParking: PayCarParking) =
+        CarViewModel(getCars, saveCar, payCarParking)
 
     @Provides
     fun motorcycleViewModelProvider(

@@ -4,7 +4,7 @@ import com.example.domain.entities.Car
 import com.example.domain.repositories.CarRepository
 
 
-class CarService(val carRepository: CarRepository) {
+class CarService(private val carRepository: CarRepository) {
 
     suspend fun saveCar(car: Car) {
         return carRepository.saveCar(car)

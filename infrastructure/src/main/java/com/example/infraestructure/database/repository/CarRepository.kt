@@ -1,10 +1,7 @@
 package com.example.infraestructure.database.repository
 
 
-import com.example.domain.entities.Car
-import com.example.domain.repositories.CarRepository
-
-class CarRepository(
+/*class CarRepository(
     private val carRepository: CarRepository
 ) : CarRepository {
 
@@ -12,4 +9,4 @@ class CarRepository(
     override suspend fun getListCars(): List<Car> = carRepository.getListCars()
     override suspend fun payParkingCar(car: Car) = carRepository.payParkingCar(car)
 
-}
+}*/

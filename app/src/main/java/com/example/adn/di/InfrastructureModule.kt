@@ -7,17 +7,17 @@ import com.example.domain.services.CarService
 import com.example.domain.services.MotorcycleService
 import dagger.Module
 import dagger.Provides
-import com.example.infraestructure.database.repository.CarRepository as CarRepositoryImp
+//import com.example.infraestructure.database.repository.CarRepository as CarRepositoryImp
 
 
 @Module
 class InfrastructureModule {
-    @Provides
+    /* @Provides
     fun carRepositoryProvider(
         carRepository: CarRepository
     ) = CarRepositoryImp(carRepository)
 
-    /*@Provides
+   @Provides
     fun motorcycleRepositoryProvider(
         motorcycleRepository: MotorcycleRepository
     ) = MotorcycleImp(motorcycleRepository)*/
