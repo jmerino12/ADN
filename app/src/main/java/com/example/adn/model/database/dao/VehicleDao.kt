@@ -1,6 +1,8 @@
-package com.example.adn.model.database
+package com.example.adn.model.database.dao
 
 import androidx.room.*
+import com.example.adn.model.database.entity.Car
+import com.example.adn.model.database.entity.Motorcycle
 
 @Dao
 interface VehicleDao {

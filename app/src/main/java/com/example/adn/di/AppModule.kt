@@ -22,8 +22,10 @@ class AppModule {
     ).build()
 
     @Provides
-    fun motorcycleDataSourceProvider(db: AppDatabase): MotorcycleRepository = RoomDataSource(db)
+    fun motorcycleDataSourceProvider(db: AppDatabase): MotorcycleRepository =
+        RoomDataSource(db)
 
     @Provides
-    fun carDataSourceProvider(db: AppDatabase): CarRepository = RoomDataSource(db)
+    fun carDataSourceProvider(db: AppDatabase): CarRepository =
+        RoomDataSource(db)
 }

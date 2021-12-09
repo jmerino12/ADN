@@ -1,12 +1,13 @@
-package com.example.adn.model.database
+package com.example.adn.model.database.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class Car(
+data class Motorcycle(
     @PrimaryKey
     val licencePlate: String,
-    val cylinderCapacity: Double = 0.0,
+    val cylinderCapacity: Double,
     val dateEnter: Long
+
 )

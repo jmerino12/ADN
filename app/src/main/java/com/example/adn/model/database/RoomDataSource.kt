@@ -1,8 +1,6 @@
 package com.example.adn.model.database
 
 
-import com.example.adn.toDomain
-import com.example.adn.toRoomVehicle
 import com.example.domain.entities.Car
 import com.example.domain.entities.Motorcycle
 import com.example.domain.repositories.CarRepository
@@ -23,6 +21,10 @@ class RoomDataSource(db: AppDatabase) : MotorcycleRepository, CarRepository {
         vehicleDao.getAllCars().map { it.toDomain() }
     }
 
+    override suspend fun payParkingCar(car: Car) = withContext(Dispatchers.IO) {
+        vehicleDao.deleteCar(car = car.toRoomVehicle())
+    }
+
     override suspend fun saveMotorcycle(motorcycle: Motorcycle) {
         vehicleDao.insertMotorCycle(motorcycle.toRoomVehicle())
     }
@@ -31,14 +33,9 @@ class RoomDataSource(db: AppDatabase) : MotorcycleRepository, CarRepository {
         vehicleDao.getAllMotorCycle().map { it.toDomain() }
     }
 
-    override suspend fun payParkingCar(car: Car) = withContext(Dispatchers.IO) {
-        vehicleDao.deleteCar(car = car.toRoomVehicle())
-    }
-
     override suspend fun payParkingMotorcycle(motorcycle: Motorcycle) =
         withContext(Dispatchers.IO) {
             vehicleDao.deleteMotorcycle(motorcycle.toRoomVehicle())
         }
-
 
 }

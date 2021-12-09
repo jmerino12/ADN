@@ -1,9 +1,9 @@
-package com.example.adn
+package com.example.adn.model.database
 
 import com.example.domain.entities.Car
 import com.example.domain.entities.Motorcycle
-import com.example.adn.model.database.Car as CarRoom
-import com.example.adn.model.database.Motorcycle as MotorCyclerRoom
+import com.example.adn.model.database.entity.Car as CarRoom
+import com.example.adn.model.database.entity.Motorcycle as MotorCyclerRoom
 
 
 fun Car.toRoomVehicle(): CarRoom = CarRoom(
