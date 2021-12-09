@@ -42,6 +42,7 @@ dependencies {
     implementation project(":domainLibrary")
     implementation project(":usecasesLibrary")
     implementation androidLibs.values()
+    implementation 'androidx.test.espresso:espresso-contrib:3.4.0'
     kapt androidKaptLibs.values()
     testImplementation testLibs.values()
     androidTestImplementation androidTestLibs.values()

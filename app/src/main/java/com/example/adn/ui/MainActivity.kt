@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
                 is Resource.Content -> {
                     if (it.data.isEmpty()) Toast.makeText(
                         this,
-                        "No hay carros registrados",
+                        "No hay motos registradas",
                         Toast.LENGTH_LONG
                     ).show()
                     adapter.submitList(it.data)
