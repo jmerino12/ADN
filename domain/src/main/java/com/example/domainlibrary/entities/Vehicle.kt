@@ -1,7 +1,7 @@
 package com.example.domainlibrary.entities
 
 
-import com.example.domainlibrary.util.InvalidDataException
+import com.example.domainlibrary.exceptions.InvalidDataException
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
