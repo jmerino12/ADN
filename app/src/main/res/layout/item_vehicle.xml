@@ -15,6 +15,7 @@
         android:id="@+id/imgFoto"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:contentDescription="@string/tipo_vehiculo"
         android:layout_marginStart="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,7 +23,7 @@
 
 
     <Button
-        android:id="@+id/tvOrden"
+        android:id="@+id/btnExit"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginEnd="16dp"
@@ -38,11 +39,11 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginStart="16dp"
-        android:layout_toStartOf="@+id/tvOrden"
+        android:layout_toStartOf="@+id/btnExit"
         android:layout_toEndOf="@id/imgFoto"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@id/tvOrden"
+        app:layout_constraintEnd_toStartOf="@id/btnExit"
         app:layout_constraintStart_toEndOf="@id/imgFoto"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="HGL000" />
@@ -53,10 +54,10 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginStart="16dp"
-        android:layout_toStartOf="@+id/tvOrden"
+        android:layout_toStartOf="@+id/btnExit"
         android:layout_toEndOf="@id/imgFoto"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@id/tvOrden"
+        app:layout_constraintEnd_toStartOf="@id/btnExit"
         app:layout_constraintStart_toEndOf="@id/imgFoto"
         app:layout_constraintTop_toBottomOf="@id/placa"
         tools:text="2020.11.01 9:34" />
@@ -67,10 +68,10 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginStart="16dp"
-        android:layout_toStartOf="@+id/tvOrden"
+        android:layout_toStartOf="@+id/btnExit"
         android:layout_toEndOf="@id/imgFoto"
         android:textSize="13sp"
-        app:layout_constraintEnd_toStartOf="@id/tvOrden"
+        app:layout_constraintEnd_toStartOf="@id/btnExit"
         app:layout_constraintStart_toEndOf="@id/imgFoto"
         app:layout_constraintTop_toBottomOf="@id/horaEntrada"
         tools:text="400 CC" />

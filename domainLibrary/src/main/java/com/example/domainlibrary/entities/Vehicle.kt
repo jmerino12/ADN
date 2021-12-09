@@ -12,8 +12,7 @@ import kotlin.math.abs
 abstract class Vehicle(
     val licencePlate: String,
     val cylinderCapacity: Double,
-    val dateEnter: Long,
-    private val dateExit: Long
+    val dateEnter: Long
 ) {
 
     init {
@@ -56,11 +55,13 @@ abstract class Vehicle(
     }
 
     private fun getDiff(): Long {
-        return abs(dateEnter - dateExit)
+        return abs(dateEnter - System.currentTimeMillis())
     }
 
     private fun diffToHour(): Long {
-        return TimeUnit.MILLISECONDS.toHours(getDiff())
+        return if (TimeUnit.MILLISECONDS.toHours(getDiff()) < 1) 1 else TimeUnit.MILLISECONDS.toHours(
+            getDiff()
+        )
     }
 
 

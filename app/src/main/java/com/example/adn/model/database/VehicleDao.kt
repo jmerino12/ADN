@@ -1,9 +1,6 @@
 package com.example.adn.model.database
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface VehicleDao {
@@ -20,5 +17,11 @@ interface VehicleDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertMotorCycle(motorcycle: Motorcycle)
+
+    @Delete
+    suspend fun deleteCar(car: Car)
+
+    @Delete
+    suspend fun deleteMotorcycle(motorcycle: Motorcycle)
 
 }

@@ -7,13 +7,12 @@ class Motorcycle(
     licencePlate: String,
     cylinderCapacity: Double,
     dateEnter: Long,
-    dateExit: Long = 0
 ) :
-    Vehicle(licencePlate, cylinderCapacity, dateEnter, dateExit) {
+    Vehicle(licencePlate, cylinderCapacity, dateEnter) {
 
 
     override fun payParking(): Double {
-        var totalToPay = calculatePaymentParking(
+        val totalToPay = calculatePaymentParking(
             PriceValues.VALUE_DAY_MOTORCYCLE,
             PriceValues.VALUE_HOUR_MOTORCYCLE
         )

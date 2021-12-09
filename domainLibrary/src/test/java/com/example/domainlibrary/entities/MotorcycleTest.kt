@@ -20,7 +20,6 @@ class MotorcycleTest {
         val motorcycle = Motorcycle(
             licencePlate = licensePLate,
             dateEnter = date,
-            dateExit = 0,
             cylinderCapacity = 400.0
         )
         // ACT
@@ -38,7 +37,6 @@ class MotorcycleTest {
         val motorcycle = Motorcycle(
             licencePlate = licensePLate,
             dateEnter = date,
-            dateExit = 0,
             cylinderCapacity = 550.0
         )
 
@@ -57,7 +55,6 @@ class MotorcycleTest {
         val motorcycle = Motorcycle(
             licencePlate = licensePLate,
             dateEnter = date,
-            dateExit = 0,
             cylinderCapacity = 500.0
         )
 

@@ -17,9 +17,10 @@ import com.example.domainlibrary.entities.Vehicle
 const val VIEW_TYPE_CAR = 1
 const val VIEW_TYPE_MOTORCYCLE = 2
 
-class VehicleAdapter : ListAdapter<Vehicle, BaseViewHolder<*>>(
-    VehicleDiffCallback
-) {
+class VehicleAdapter(private val listener: (Vehicle) -> Unit) :
+    ListAdapter<Vehicle, BaseViewHolder<*>>(
+        VehicleDiffCallback
+    ) {
 
 
     companion object {
@@ -103,6 +104,9 @@ class VehicleAdapter : ListAdapter<Vehicle, BaseViewHolder<*>>(
                 )
             )
             binding.horaEntrada.text = convertLongToTime(item.dateEnter)
+            binding.btnExit.setOnClickListener {
+                listener(item)
+            }
         }
     }
 
@@ -121,6 +125,9 @@ class VehicleAdapter : ListAdapter<Vehicle, BaseViewHolder<*>>(
             )
             binding.horaEntrada.text = convertLongToTime(item.dateEnter)
             binding.cilindraje.text = item.cylinderCapacity.toString()
+            binding.btnExit.setOnClickListener {
+                listener(item)
+            }
         }
     }
 }

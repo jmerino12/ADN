@@ -29,5 +29,14 @@ class RoomDataSource(db: AppDatabase) : LocalDataSource {
         vehicleDao.getAllMotorCycle().map { it.toDomain() }
     }
 
+    override suspend fun payParkingCar(car: Car) = withContext(Dispatchers.IO) {
+        vehicleDao.deleteCar(car = car.toRoomVehicle())
+    }
+
+    override suspend fun payParkingMotorcycle(motorcycle: Motorcycle) =
+        withContext(Dispatchers.IO) {
+            vehicleDao.deleteMotorcycle(motorcycle.toRoomVehicle())
+        }
+
 
 }

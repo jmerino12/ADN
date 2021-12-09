@@ -11,4 +11,8 @@ class MotorcycleRepository(
     }
 
     suspend fun saveMotorcycle(motorcycle: Motorcycle) = localDataSource.saveMotorcycle(motorcycle)
+
+    suspend fun payParking(motorcycle: Motorcycle) =
+        localDataSource.payParkingMotorcycle(motorcycle)
+
 }

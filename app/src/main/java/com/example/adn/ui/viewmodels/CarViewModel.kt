@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.adn.common.Resource
 import com.example.domainlibrary.entities.Car
 import com.example.usecaseslibrary.GetCars
+import com.example.usecaseslibrary.PayCarParking
 import com.example.usecaseslibrary.SaveCar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -14,7 +15,8 @@ import kotlinx.coroutines.launch
 
 class CarViewModel(
     private val getCars: GetCars,
-    private val saveCar: SaveCar
+    private val saveCar: SaveCar,
+    private val payCarParking: PayCarParking
 ) :
     ViewModel() {
     private val viewModelJob = Job()
@@ -40,6 +42,13 @@ class CarViewModel(
     fun saveCar(car: Car) {
         uiScope.launch {
             saveCar.invoke(car)
+            getListCar()
+        }
+    }
+
+    fun payParking(car: Car) {
+        uiScope.launch {
+            payCarParking.invoke(car)
             getListCar()
         }
     }

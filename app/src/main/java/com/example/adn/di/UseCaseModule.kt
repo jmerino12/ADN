@@ -3,10 +3,7 @@ package com.example.adn.di
 
 import com.example.datalibrary.repository.CarRepository
 import com.example.datalibrary.repository.MotorcycleRepository
-import com.example.usecaseslibrary.GetCars
-import com.example.usecaseslibrary.GetMotorcycles
-import com.example.usecaseslibrary.SaveCar
-import com.example.usecaseslibrary.SaveMotorcycle
+import com.example.usecaseslibrary.*
 import dagger.Module
 import dagger.Provides
 
@@ -26,4 +23,12 @@ class UseCaseModule {
     @Provides
     fun saveMotorcycleProvider(motorcycleRepository: MotorcycleRepository) =
         SaveMotorcycle(motorcycleRepository)
+
+    @Provides
+    fun payCarParking(carRepository: CarRepository) =
+        PayCarParking(carRepository)
+
+    @Provides
+    fun payMotorcycleParking(motorcycleRepository: MotorcycleRepository) =
+        PayMotorcycleParking(motorcycleRepository)
 }

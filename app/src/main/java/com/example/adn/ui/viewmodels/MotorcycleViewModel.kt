@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.adn.common.Resource
 import com.example.domainlibrary.entities.Motorcycle
 import com.example.usecaseslibrary.GetMotorcycles
+import com.example.usecaseslibrary.PayMotorcycleParking
 import com.example.usecaseslibrary.SaveMotorcycle
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -14,7 +15,8 @@ import kotlinx.coroutines.launch
 
 class MotorcycleViewModel(
     private val getMotorcycles: GetMotorcycles,
-    private val saveMotorcycle: SaveMotorcycle
+    private val saveMotorcycle: SaveMotorcycle,
+    private val payMotorcycleParking: PayMotorcycleParking
 ) :
     ViewModel() {
     private val viewModelJob = Job()
@@ -42,6 +44,13 @@ class MotorcycleViewModel(
     fun saveMotorcycle(motorcycle: Motorcycle) {
         uiScope.launch {
             saveMotorcycle.invoke(motorcycle)
+            getListMotorCycle()
+        }
+    }
+
+    fun payParking(motorcycle: Motorcycle) {
+        uiScope.launch {
+            payMotorcycleParking.invoke(motorcycle)
             getListMotorCycle()
         }
     }

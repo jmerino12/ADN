@@ -13,4 +13,6 @@ class CarRepository(
     }
 
     suspend fun saveCar(car: Car) = localDataSource.saveCar(car)
+
+    suspend fun payParking(car: Car) = localDataSource.payParkingCar(car)
 }

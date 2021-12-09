@@ -2,6 +2,7 @@ package com.example.adn.ui
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.adn.R
@@ -52,6 +53,11 @@ class MainActivity : AppCompatActivity() {
                     binding.loading.visibility = View.VISIBLE
                 }
                 is Resource.Content -> {
+                    if (it.data.isEmpty()) Toast.makeText(
+                        this,
+                        "No hay carros registrados",
+                        Toast.LENGTH_LONG
+                    ).show()
                     adapter.submitList(it.data)
                     binding.loading.visibility = View.GONE
                 }
@@ -70,6 +76,11 @@ class MainActivity : AppCompatActivity() {
                     binding.loading.visibility = View.VISIBLE
                 }
                 is Resource.Content -> {
+                    if (it.data.isEmpty()) Toast.makeText(
+                        this,
+                        "No hay carros registrados",
+                        Toast.LENGTH_LONG
+                    ).show()
                     adapter.submitList(it.data)
                     binding.loading.visibility = View.GONE
 
@@ -84,9 +95,45 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun setupRecyclerView() {
-        adapter = VehicleAdapter()
+        adapter = VehicleAdapter(::onVehicleClicked)
         binding.rvVehicles.layoutManager = LinearLayoutManager(this)
         binding.rvVehicles.adapter = adapter
+    }
+
+    private fun onVehicleClicked(vehicle: Vehicle) {
+        when (vehicle) {
+            is Car -> {
+                dialogFactory.getDialog(
+                    this,
+                    MessageFactory.TYPE_INFO,
+                    "El precio total a pagar por el parking es de ${vehicle.payParking()}"
+                )
+                    .setPositiveButton("Pagar") { dialog, _ ->
+                        viewModelCar.payParking(vehicle)
+                        dialog.dismiss()
+                    }
+                    .setNegativeButton("Cancelar") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .show()
+            }
+            is Motorcycle -> {
+                dialogFactory.getDialog(
+                    this,
+                    MessageFactory.TYPE_INFO,
+                    "El precio total a pagar por el parking es de ${vehicle.payParking()}"
+                ).setPositiveButton("Pagar") { dialog, _ ->
+                    viewModelMotorcycle.payParking(vehicle)
+                    dialog.dismiss()
+                }
+                    .setNegativeButton("Cancelar") { dialog, _ ->
+                        dialog.dismiss()
+                    }.show()
+            }
+            else -> {
+                throw RuntimeException("tipo de vehiculo no declaradao")
+            }
+        }
     }
 
     private fun listenerRadioButton() {

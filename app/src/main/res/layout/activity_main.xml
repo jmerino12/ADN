@@ -9,9 +9,9 @@
 
     <ProgressBar
         android:id="@+id/loading"
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:visibility="gone" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -91,20 +91,22 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Motocicleta" />
+                android:text="@string/motocicleta" />
 
             <RadioButton
                 android:id="@+id/rbtnCar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Carro" />
+                android:text="@string/carro" />
         </RadioGroup>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvVehicles"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:paddingBottom="88dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -116,7 +118,7 @@
         android:id="@+id/addVehicle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
+        android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:contentDescription="@string/agregarVehiculo"
         app:srcCompat="@drawable/ic_add" />
