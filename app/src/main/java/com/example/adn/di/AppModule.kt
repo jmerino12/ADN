@@ -4,7 +4,8 @@ import android.app.Application
 import androidx.room.Room
 import com.example.adn.model.database.AppDatabase
 import com.example.adn.model.database.RoomDataSource
-import com.example.domainlibrary.repositories.LocalDataSource
+import com.example.domainlibrary.repositories.CarRepository
+import com.example.domainlibrary.repositories.MotorcycleRepository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -21,5 +22,8 @@ class AppModule {
     ).build()
 
     @Provides
-    fun localDataSourceProvider(db: AppDatabase): LocalDataSource = RoomDataSource(db)
+    fun motorcycleDataSourceProvider(db: AppDatabase): MotorcycleRepository = RoomDataSource(db)
+
+    @Provides
+    fun carDataSourceProvider(db: AppDatabase): CarRepository = RoomDataSource(db)
 }

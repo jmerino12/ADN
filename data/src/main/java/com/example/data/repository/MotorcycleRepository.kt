@@ -1,18 +1,19 @@
-package com.example.datalibrary.repository
+package com.example.data.repository
 
 import com.example.domainlibrary.entities.Motorcycle
-import com.example.domainlibrary.repositories.LocalDataSource
+import com.example.domainlibrary.repositories.MotorcycleRepository
 
 class MotorcycleRepository(
-    private val localDataSource: LocalDataSource
+    private val motorcycleRepository: MotorcycleRepository
 ) {
     suspend fun getMotorcycles(): List<Motorcycle> {
-        return localDataSource.getListMotorcycle()
+        return motorcycleRepository.getListMotorcycle()
     }
 
-    suspend fun saveMotorcycle(motorcycle: Motorcycle) = localDataSource.saveMotorcycle(motorcycle)
+    suspend fun saveMotorcycle(motorcycle: Motorcycle) =
+        motorcycleRepository.saveMotorcycle(motorcycle)
 
     suspend fun payParking(motorcycle: Motorcycle) =
-        localDataSource.payParkingMotorcycle(motorcycle)
+        motorcycleRepository.payParkingMotorcycle(motorcycle)
 
 }

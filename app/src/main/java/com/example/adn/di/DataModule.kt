@@ -1,20 +1,21 @@
 package com.example.adn.di
 
-import com.example.datalibrary.repository.CarRepository
-import com.example.datalibrary.repository.MotorcycleRepository
-import com.example.domainlibrary.repositories.LocalDataSource
+import com.example.domainlibrary.repositories.CarRepository
+import com.example.domainlibrary.repositories.MotorcycleRepository
 import dagger.Module
 import dagger.Provides
+import com.example.data.repository.CarRepository as CarRepositoryImp
+import com.example.data.repository.MotorcycleRepository as MotorcycleImp
 
 @Module
 class DataModule {
     @Provides
     fun carRepositoryProvider(
-        localDataSource: LocalDataSource
-    ) = CarRepository(localDataSource = localDataSource)
+        carRepository: CarRepository
+    ) = CarRepositoryImp(carRepository)
 
     @Provides
     fun motorcycleRepositoryProvider(
-        localDataSource: LocalDataSource
-    ) = MotorcycleRepository(localDataSource = localDataSource)
+        motorcycleRepository: MotorcycleRepository
+    ) = MotorcycleImp(motorcycleRepository)
 }

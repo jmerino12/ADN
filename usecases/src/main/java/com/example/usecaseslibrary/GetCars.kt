@@ -1,6 +1,6 @@
 package com.example.usecaseslibrary
 
-import com.example.datalibrary.repository.CarRepository
+import com.example.data.repository.CarRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

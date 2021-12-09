@@ -1,7 +1,7 @@
 package com.example.usecaseslibrary
 
 
-import com.example.datalibrary.repository.MotorcycleRepository
+import com.example.data.repository.MotorcycleRepository
 import com.example.domainlibrary.entities.Motorcycle
 
 class SaveMotorcycle(private val motorcycleRepository: MotorcycleRepository) {
