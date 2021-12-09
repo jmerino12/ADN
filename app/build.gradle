@@ -77,7 +77,7 @@ jacoco {
 }*/
 
 dependencies {
-    implementation project(":dataLibrary")
+    implementation project(':data')
     implementation project(':domain')
     implementation project(':usecases')
     implementation androidLibs.values()

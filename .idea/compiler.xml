@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="1.7">
-      <module name="ADN.app" target="11" />
-      <module name="ADN.data" target="1.8" />
-      <module name="ADN.dataLibrary" target="11" />
-      <module name="ADN.domain" target="11" />
-      <module name="ADN.usecases" target="11" />
-    </bytecodeTargetLevel>
+    <bytecodeTargetLevel target="11" />
   </component>
 </project>

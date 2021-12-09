@@ -9,5 +9,5 @@ dependencyResolutionManagement {
 rootProject.name = "ADN"
 include ':app'
 include ':domain'
-include ':dataLibrary'
+include ':data'
 include ':usecases'
