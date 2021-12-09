@@ -44,7 +44,7 @@ jacoco {
 }
 
 
-task jacocoTestReport(type: JacocoReport, dependsOn: [':domainLibrary:testDebugUnitTest', 'testDebugUnitTest']) {
+/*task jacocoTestReport(type: JacocoReport, dependsOn: [':domainLibrary:testDebugUnitTest', 'testDebugUnitTest']) {
     reports {
         xml.enabled true
         html.enabled true
@@ -74,7 +74,7 @@ task jacocoTestReport(type: JacocoReport, dependsOn: [':domainLibrary:testDebugU
     classDirectories.setFrom(files([kotlinDebugTree.asFileTree]))
     executionData.setFrom(executionFiles.asFileTree)
 
-}
+}*/
 
 dependencies {
     implementation project(":dataLibrary")
