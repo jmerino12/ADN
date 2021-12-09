@@ -36,15 +36,15 @@ android {
     }
 }
 
-task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
+/*task jacocoTestReport(type: JacocoReport, dependsOn: ['connectedAndroidTest','testDebugUnitTest']) {
     reports {
         xml.enabled  true
         html.enabled  true
     }
 
-
-    def kotlinDebugTree = layout.files("$buildDir/tmp/kotlin-classes/debug")
-    def mainSource = layout.files("$project.projectDir/src/main/java")
+    def appProject = project(':app')
+    def kotlinDebugTree = layout.files("$buildDir/tmp/kotlin-classes/debug","$appProject.buildDir/classes/koltin")
+    def mainSource = layout.files("$project.projectDir/src/main/java","$appProject.projectDir/src/main/java")
     def executionFilesFromConnectedAndroidTest = fileTree(
             dir: "$buildDir",
             includes: ["outputs/code_coverage/debugAndroidTest/connected/**coverage.ec"]
@@ -53,17 +53,21 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
 
     def executionFileForUnitTestInModule = "$buildDir/outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec"
 
+    def executionFileForUnitTestInOtherModule = "$appProject.buildDir/jacoco/test.exec"
+
 
 
     def executionFiles = layout.files(
             executionFilesFromConnectedAndroidTest,
             executionFileForUnitTestInModule,
+            executionFileForUnitTestInOtherModule
+
     )
     sourceDirectories.setFrom(files([mainSource]))
     classDirectories.setFrom(files([kotlinDebugTree.asFileTree]))
     executionData.setFrom(executionFiles.asFileTree)
 
-}
+}*/
 
 
 
