@@ -1,8 +1,8 @@
 package com.example.data.repository
 
 
-import com.example.domainlibrary.entities.Car
-import com.example.domainlibrary.repositories.CarRepository
+import com.example.domain.entities.Car
+import com.example.domain.repositories.CarRepository
 
 class CarRepository(
     private val carRepository: CarRepository

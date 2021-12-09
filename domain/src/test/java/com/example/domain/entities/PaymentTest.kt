@@ -1,4 +1,4 @@
-package com.example.domainlibrary.entities
+package com.example.domain.entities
 
 import org.junit.Assert
 import org.junit.Test

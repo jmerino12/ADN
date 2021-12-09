@@ -1,7 +1,7 @@
 package com.example.data.repository
 
-import com.example.domainlibrary.entities.Motorcycle
-import com.example.domainlibrary.repositories.MotorcycleRepository
+import com.example.domain.entities.Motorcycle
+import com.example.domain.repositories.MotorcycleRepository
 
 class MotorcycleRepository(
     private val motorcycleRepository: MotorcycleRepository

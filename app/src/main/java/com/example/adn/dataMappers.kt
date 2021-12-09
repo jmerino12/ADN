@@ -1,7 +1,7 @@
 package com.example.adn
 
-import com.example.domainlibrary.entities.Car
-import com.example.domainlibrary.entities.Motorcycle
+import com.example.domain.entities.Car
+import com.example.domain.entities.Motorcycle
 import com.example.adn.model.database.Car as CarRoom
 import com.example.adn.model.database.Motorcycle as MotorCyclerRoom
 

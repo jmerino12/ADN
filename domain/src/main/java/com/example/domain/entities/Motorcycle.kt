@@ -1,4 +1,4 @@
-package com.example.domainlibrary.entities
+package com.example.domain.entities
 
 class Motorcycle(
     licencePlate: String,

@@ -1,9 +1,13 @@
 package com.example.usecaseslibrary
 
 
-import com.example.data.repository.MotorcycleRepository
-import com.example.domainlibrary.entities.Motorcycle
+import com.example.domain.entities.Motorcycle
+import com.example.domain.services.MotorcycleService
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
-class SaveMotorcycle(private val motorcycleRepository: MotorcycleRepository) {
-    suspend fun invoke(motorcycle: Motorcycle) = motorcycleRepository.saveMotorcycle(motorcycle)
+class SaveMotorcycle(private val motorcycleService: MotorcycleService) {
+    suspend fun invoke(motorcycle: Motorcycle) = withContext(Dispatchers.IO) {
+        motorcycleService.saveMotorcycle(motorcycle)
+    }
 }

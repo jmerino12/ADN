@@ -1,11 +1,11 @@
 package com.example.usecaseslibrary
 
-import com.example.data.repository.CarRepository
+import com.example.domain.services.CarService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class GetCars(private val carRepository: CarRepository) {
+class GetCars(private val carService: CarService) {
     suspend fun invoke() = withContext(Dispatchers.IO) {
-        carRepository.getCars()
+        carService.getCars()
     }
 }

@@ -14,9 +14,9 @@ import com.example.adn.databinding.ActivityMainBinding
 import com.example.adn.ui.viewmodels.CarViewModel
 import com.example.adn.ui.viewmodels.MotorcycleViewModel
 import com.example.adn.ui.viewmodels.VehicleAdapter
-import com.example.domainlibrary.entities.Car
-import com.example.domainlibrary.entities.Motorcycle
-import com.example.domainlibrary.entities.Vehicle
+import com.example.domain.entities.Car
+import com.example.domain.entities.Motorcycle
+import com.example.domain.entities.Vehicle
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,6 +1,6 @@
-package com.example.domainlibrary.entities
+package com.example.domain.entities
 
-import com.example.domainlibrary.exceptions.InvalidDataException
+import com.example.domain.exceptions.InvalidDataException
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Test

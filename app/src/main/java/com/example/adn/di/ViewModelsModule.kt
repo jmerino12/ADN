@@ -20,4 +20,6 @@ class ViewModelsModule {
         payMotorcycleParking: PayMotorcycleParking
     ) =
         MotorcycleViewModel(getMotorcycles, saveMotorcycle, payMotorcycleParking)
+
+
 }

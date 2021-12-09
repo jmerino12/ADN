@@ -4,8 +4,8 @@ import android.app.Application
 import androidx.room.Room
 import com.example.adn.model.database.AppDatabase
 import com.example.adn.model.database.RoomDataSource
-import com.example.domainlibrary.repositories.CarRepository
-import com.example.domainlibrary.repositories.MotorcycleRepository
+import com.example.domain.repositories.CarRepository
+import com.example.domain.repositories.MotorcycleRepository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

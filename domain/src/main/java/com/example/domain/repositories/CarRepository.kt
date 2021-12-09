@@ -1,6 +1,6 @@
-package com.example.domainlibrary.repositories
+package com.example.domain.repositories
 
-import com.example.domainlibrary.entities.Car
+import com.example.domain.entities.Car
 
 interface CarRepository {
     suspend fun saveCar(car: Car)

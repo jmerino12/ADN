@@ -10,9 +10,9 @@ import com.example.adn.R
 import com.example.adn.common.BaseViewHolder
 import com.example.adn.common.convertLongToTime
 import com.example.adn.databinding.ItemVehicleBinding
-import com.example.domainlibrary.entities.Car
-import com.example.domainlibrary.entities.Motorcycle
-import com.example.domainlibrary.entities.Vehicle
+import com.example.domain.entities.Car
+import com.example.domain.entities.Motorcycle
+import com.example.domain.entities.Vehicle
 
 const val VIEW_TYPE_CAR = 1
 const val VIEW_TYPE_MOTORCYCLE = 2

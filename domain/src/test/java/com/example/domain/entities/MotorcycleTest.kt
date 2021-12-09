@@ -1,4 +1,4 @@
-package com.example.domainlibrary.entities
+package com.example.domain.entities
 
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue

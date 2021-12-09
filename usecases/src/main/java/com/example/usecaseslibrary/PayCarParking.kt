@@ -1,14 +1,14 @@
 package com.example.usecaseslibrary
 
-import com.example.data.repository.CarRepository
-import com.example.domainlibrary.entities.Car
+import com.example.domain.entities.Car
+import com.example.domain.services.CarService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class PayCarParking(
-    private val carRepository: CarRepository,
+    private val carService: CarService
 ) {
     suspend fun invoke(car: Car) = withContext(Dispatchers.IO) {
-        carRepository.payParking(car)
+        carService.payParking(car)
     }
 }
