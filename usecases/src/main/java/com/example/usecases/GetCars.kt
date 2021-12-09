@@ -1,4 +1,4 @@
-package com.example.usecaseslibrary
+package com.example.usecases
 
 import com.example.domain.services.CarService
 import kotlinx.coroutines.Dispatchers

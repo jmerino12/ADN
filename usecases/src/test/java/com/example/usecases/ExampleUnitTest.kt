@@ -1,4 +1,4 @@
-package com.example.usecaseslibrary
+package com.example.usecases
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

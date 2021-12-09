@@ -2,10 +2,10 @@ package com.example.adn.di
 
 import android.app.Application
 import androidx.room.Room
-import com.example.adn.model.database.AppDatabase
-import com.example.adn.model.database.RoomDataSource
 import com.example.domain.repositories.CarRepository
 import com.example.domain.repositories.MotorcycleRepository
+import com.example.infraestructure.database.AppDatabase
+import com.example.infraestructure.database.RoomDataSource
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

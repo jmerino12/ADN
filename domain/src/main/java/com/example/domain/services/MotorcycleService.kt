@@ -3,7 +3,7 @@ package com.example.domain.services
 import com.example.domain.entities.Motorcycle
 import com.example.domain.repositories.MotorcycleRepository
 
-class MotorcycleService(val motorcycleRepository: MotorcycleRepository) {
+class MotorcycleService(private val motorcycleRepository: MotorcycleRepository) {
 
     suspend fun saveMotorcycle(motorcycle: Motorcycle) {
         motorcycleRepository.saveMotorcycle(motorcycle)

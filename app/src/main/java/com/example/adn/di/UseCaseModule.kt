@@ -1,16 +1,17 @@
 package com.example.adn.di
 
 
-import com.example.domain.services.CarService
 import com.example.domain.services.MotorcycleService
-import com.example.usecaseslibrary.*
+import com.example.usecases.GetMotorcycles
+import com.example.usecases.PayMotorcycleParking
+import com.example.usecases.SaveMotorcycle
 import dagger.Module
 import dagger.Provides
 
 @Module
 class UseCaseModule {
 
-    @Provides
+    /*@Provides
     fun getCarProvider(carService: CarService) = GetCars(carService)
 
     @Provides
@@ -18,7 +19,7 @@ class UseCaseModule {
 
     @Provides
     fun payCarParking(carService: CarService) =
-        PayCarParking(carService)
+        PayCarParking(carService)*/
 
     @Provides
     fun getMotorcycleProvider(motorcycleService: MotorcycleService) =

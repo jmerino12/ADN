@@ -1,9 +1,6 @@
-package com.example.data.repository
+package com.example.infraestructure.database.repository
 
-import com.example.domain.entities.Motorcycle
-import com.example.domain.repositories.MotorcycleRepository
-
-class MotorcycleRepository(
+/*class MotorcycleRepository(
     private val motorcycleRepository: MotorcycleRepository
 ) {
     suspend fun getMotorcycles(): List<Motorcycle> {
@@ -16,4 +13,4 @@ class MotorcycleRepository(
     suspend fun payParking(motorcycle: Motorcycle) =
         motorcycleRepository.payParkingMotorcycle(motorcycle)
 
-}
+}*/

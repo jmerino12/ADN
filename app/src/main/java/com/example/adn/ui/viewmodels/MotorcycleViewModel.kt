@@ -5,9 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.adn.common.Resource
 import com.example.domain.entities.Motorcycle
-import com.example.usecaseslibrary.GetMotorcycles
-import com.example.usecaseslibrary.PayMotorcycleParking
-import com.example.usecaseslibrary.SaveMotorcycle
+import com.example.usecases.GetMotorcycles
+import com.example.usecases.PayMotorcycleParking
+import com.example.usecases.SaveMotorcycle
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
