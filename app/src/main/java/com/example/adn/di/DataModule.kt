@@ -1,8 +1,8 @@
 package com.example.adn.di
 
-import com.example.data.source.LocalDataSource
 import com.example.datalibrary.repository.CarRepository
 import com.example.datalibrary.repository.MotorcycleRepository
+import com.example.domainlibrary.repositories.LocalDataSource
 import dagger.Module
 import dagger.Provides
 

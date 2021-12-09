@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import com.example.adn.model.database.AppDatabase
 import com.example.adn.model.database.RoomDataSource
-import com.example.data.source.LocalDataSource
+import com.example.domainlibrary.repositories.LocalDataSource
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

@@ -1,7 +1,7 @@
 package com.example.datalibrary.repository
 
-import com.example.data.source.LocalDataSource
 import com.example.domainlibrary.entities.Motorcycle
+import com.example.domainlibrary.repositories.LocalDataSource
 
 class MotorcycleRepository(
     private val localDataSource: LocalDataSource

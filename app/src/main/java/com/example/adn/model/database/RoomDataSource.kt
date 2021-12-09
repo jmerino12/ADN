@@ -3,9 +3,9 @@ package com.example.adn.model.database
 
 import com.example.adn.toDomain
 import com.example.adn.toRoomVehicle
-import com.example.data.source.LocalDataSource
 import com.example.domainlibrary.entities.Car
 import com.example.domainlibrary.entities.Motorcycle
+import com.example.domainlibrary.repositories.LocalDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
