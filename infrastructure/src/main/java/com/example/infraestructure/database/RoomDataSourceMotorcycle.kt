@@ -2,6 +2,8 @@ package com.example.infraestructure.database
 
 import com.example.domain.entities.Motorcycle
 import com.example.domain.repositories.VehicleRepository
+import com.example.infraestructure.mapper.toDomain
+import com.example.infraestructure.mapper.toRoomVehicle
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

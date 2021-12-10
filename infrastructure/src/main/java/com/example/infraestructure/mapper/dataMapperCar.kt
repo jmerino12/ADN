@@ -1,4 +1,4 @@
-package com.example.infraestructure.database
+package com.example.infraestructure.mapper
 
 import com.example.domain.entities.Car
 import com.example.infraestructure.database.entity.Car as CarRoom

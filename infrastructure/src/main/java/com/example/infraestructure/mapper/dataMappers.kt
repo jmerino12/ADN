@@ -1,10 +1,7 @@
-package com.example.infraestructure.database
-
+package com.example.infraestructure.mapper
 
 import com.example.domain.entities.Motorcycle
 import com.example.infraestructure.database.entity.Motorcycle as MotorCyclerRoom
-
-
 
 fun Motorcycle.toRoomVehicle(): MotorCyclerRoom = MotorCyclerRoom(
     cylinderCapacity = cylinderCapacity,
