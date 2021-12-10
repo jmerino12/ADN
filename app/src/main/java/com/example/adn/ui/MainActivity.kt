@@ -210,8 +210,8 @@ class MainActivity : AppCompatActivity() {
             viewModelMotorcycle.saveMotorcycle(
                 Motorcycle(
                     binding.etPlaca.text.toString(),
+                    dateEnter = System.currentTimeMillis(),
                     binding.etCilindraje.text.toString().toDouble(),
-                    dateEnter = System.currentTimeMillis()
                 )
             )
         } catch (e: Exception) {

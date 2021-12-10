@@ -2,13 +2,14 @@ package com.example.domain.entities
 
 class Motorcycle(
     licencePlate: String,
-    cylinderCapacity: Double,
     dateEnter: Long,
+    val cylinderCapacity: Double,
 ) :
-    Vehicle(licencePlate, cylinderCapacity, dateEnter) {
+    Vehicle(licencePlate = licencePlate, dateEnter = dateEnter) {
 
     private val VALUE_HOUR_MOTORCYCLE = 500.0
     private val VALUE_DAY_MOTORCYCLE = 4000.0
+    private val CYLINDER_CAPACITY_500 = 500
 
     override fun payParking(): Double {
         val totalToPay = calculatePaymentParking(
@@ -22,6 +23,9 @@ class Motorcycle(
         }
     }
 
+    private fun isCylinderCapacityMore500(): Boolean {
+        return cylinderCapacity >= CYLINDER_CAPACITY_500
+    }
 
 }
 

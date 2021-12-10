@@ -2,10 +2,9 @@ package com.example.domain.entities
 
 class Car(
     licencePlate: String,
-    cylinderCapacity: Double = 0.0,
     dateEnter: Long,
 ) :
-    Vehicle(licencePlate, cylinderCapacity, dateEnter) {
+    Vehicle(licencePlate, dateEnter) {
 
     private val VALUE_DAY_CAR = 8000.0
     private val VALUE_HOUR_CAR = 1000.0

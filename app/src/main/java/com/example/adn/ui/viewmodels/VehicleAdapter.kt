@@ -22,7 +22,6 @@ class VehicleAdapter(private val listener: (Vehicle) -> Unit) :
         VehicleDiffCallback
     ) {
 
-
     companion object {
         private val VehicleDiffCallback = object : DiffUtil.ItemCallback<Vehicle>() {
             override fun areItemsTheSame(oldItem: Vehicle, newItem: Vehicle): Boolean {
@@ -64,10 +63,10 @@ class VehicleAdapter(private val listener: (Vehicle) -> Unit) :
     override fun onBindViewHolder(holder: BaseViewHolder<*>, position: Int) {
         when (holder) {
             is CarViewHolder -> {
-                holder.bind(getItem(position), position)
+                holder.bind(getItem(position) as Car, position)
             }
             is MotorcycleViewHolder -> {
-                holder.bind(getItem(position), position)
+                holder.bind(getItem(position) as Motorcycle, position)
             }
             else -> {
                 throw RuntimeException("ViewType no declarado ")
@@ -93,9 +92,9 @@ class VehicleAdapter(private val listener: (Vehicle) -> Unit) :
     inner class CarViewHolder(
         private val binding: ItemVehicleBinding
     ) :
-        BaseViewHolder<Vehicle>(binding.root) {
+        BaseViewHolder<Car>(binding.root) {
         @SuppressLint("SetTextI18n")
-        override fun bind(item: Vehicle, position: Int) {
+        override fun bind(item: Car, position: Int) {
             binding.placa.text = item.licencePlate
             binding.imgFoto.setImageDrawable(
                 AppCompatResources.getDrawable(
@@ -113,9 +112,9 @@ class VehicleAdapter(private val listener: (Vehicle) -> Unit) :
     inner class MotorcycleViewHolder(
         private val binding: ItemVehicleBinding
     ) :
-        BaseViewHolder<Vehicle>(binding.root) {
+        BaseViewHolder<Motorcycle>(binding.root) {
         @SuppressLint("SetTextI18n")
-        override fun bind(item: Vehicle, position: Int) {
+        override fun bind(item: Motorcycle, position: Int) {
             binding.placa.text = item.licencePlate
             binding.imgFoto.setImageDrawable(
                 AppCompatResources.getDrawable(

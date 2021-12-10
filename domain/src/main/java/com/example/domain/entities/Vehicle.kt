@@ -9,7 +9,6 @@ import kotlin.math.abs
 
 abstract class Vehicle(
     val licencePlate: String,
-    val cylinderCapacity: Double,
     val dateEnter: Long
 ) {
     private val REGEX_LICENCE_PLATE = "^[A-Z]{3}+[0-9]{2}[a-zA-Z0-9]\$"
@@ -18,7 +17,6 @@ abstract class Vehicle(
     private val INTIAL_LICENSE_PLATE = "A"
     private val DAY_DENIED_SUNDAY = "domingo"
     private val DAY_DENIED_MONDAY = "lunes"
-    private val CYLINDER_CAPACITY_500 = 500
 
     init {
         if (!validateLicencePlate()) {
@@ -63,10 +61,6 @@ abstract class Vehicle(
     }
 
     abstract fun payParking(): Double
-
-    fun isCylinderCapacityMore500(): Boolean {
-        return cylinderCapacity >= CYLINDER_CAPACITY_500
-    }
 
     fun calculatePaymentParking(valuePerDay: Double, valuePerHour: Double): Double {
         var getHours = diffToHourBetweenDateEnterAndExitDate()
