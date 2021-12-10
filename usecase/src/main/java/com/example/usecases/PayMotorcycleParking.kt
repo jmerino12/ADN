@@ -1,7 +1,7 @@
 package com.example.usecases
 
-import com.example.domain.entities.Motorcycle
-import com.example.domain.services.VehicleService
+import com.example.domain.vehicle.entities.Motorcycle
+import com.example.domain.vehicle.services.VehicleService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

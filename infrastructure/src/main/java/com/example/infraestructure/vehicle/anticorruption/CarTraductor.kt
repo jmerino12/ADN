@@ -1,7 +1,7 @@
-package com.example.infraestructure.mapper
+package com.example.infraestructure.vehicle.anticorruption
 
-import com.example.domain.entities.Car
-import com.example.infraestructure.database.entity.Car as CarRoom
+import com.example.domain.vehicle.entities.Car
+import com.example.infraestructure.vehicle.entity.Car as CarRoom
 
 fun Car.toRoomVehicle(): CarRoom = CarRoom(
     licencePlate = licencePlate,

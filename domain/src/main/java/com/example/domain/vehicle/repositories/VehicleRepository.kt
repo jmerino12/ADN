@@ -1,6 +1,6 @@
-package com.example.domain.repositories
+package com.example.domain.vehicle.repositories
 
-import com.example.domain.entities.Vehicle
+import com.example.domain.vehicle.entities.Vehicle
 
 interface VehicleRepository<T> where T : Vehicle {
     suspend fun saveVehicle(data: T)

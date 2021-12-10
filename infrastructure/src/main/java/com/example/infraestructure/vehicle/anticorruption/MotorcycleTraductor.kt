@@ -1,7 +1,7 @@
-package com.example.infraestructure.mapper
+package com.example.infraestructure.vehicle.anticorruption
 
-import com.example.domain.entities.Motorcycle
-import com.example.infraestructure.database.entity.Motorcycle as MotorCyclerRoom
+import com.example.domain.vehicle.entities.Motorcycle
+import com.example.infraestructure.vehicle.entity.Motorcycle as MotorCyclerRoom
 
 fun Motorcycle.toRoomVehicle(): MotorCyclerRoom = MotorCyclerRoom(
     cylinderCapacity = cylinderCapacity,

@@ -1,4 +1,4 @@
-package com.example.domain.entities
+package com.example.domain.vehicle.entities
 
 class Car(
     licencePlate: String,

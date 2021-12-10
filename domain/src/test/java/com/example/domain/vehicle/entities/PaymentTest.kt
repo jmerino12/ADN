@@ -1,4 +1,4 @@
-package com.example.domain.entities
+package com.example.domain.vehicle.entities
 
 import org.junit.Assert
 import org.junit.Test

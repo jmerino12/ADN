@@ -1,14 +1,15 @@
-package com.example.infraestructure.database
+package com.example.infraestructure.vehicle.repository
 
 
-import com.example.domain.entities.Car
-import com.example.domain.repositories.VehicleRepository
-import com.example.infraestructure.mapper.toDomain
-import com.example.infraestructure.mapper.toRoomVehicle
+import com.example.domain.vehicle.entities.Car
+import com.example.domain.vehicle.repositories.VehicleRepository
+import com.example.infraestructure.shared.AppDatabase
+import com.example.infraestructure.vehicle.anticorruption.toDomain
+import com.example.infraestructure.vehicle.anticorruption.toRoomVehicle
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class RoomDataSourceCar(db: AppDatabase) : VehicleRepository<Car> {
+class RoomCarRepository(db: AppDatabase) : VehicleRepository<Car> {
 
     private val vehicleDao = db.vehicleDao()
 

@@ -1,8 +1,8 @@
-package com.example.infraestructure.database.dao
+package com.example.infraestructure.vehicle.dao
 
 import androidx.room.*
-import com.example.infraestructure.database.entity.Car
-import com.example.infraestructure.database.entity.Motorcycle
+import com.example.infraestructure.vehicle.entity.Car
+import com.example.infraestructure.vehicle.entity.Motorcycle
 
 @Dao
 interface VehicleDao {

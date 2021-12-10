@@ -1,6 +1,6 @@
-package com.example.domain.entities
+package com.example.domain.vehicle.entities
 
-import com.example.domain.exceptions.InvalidDataException
+import com.example.domain.shared.exceptions.InvalidDataException
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Test
@@ -123,7 +123,7 @@ class CarTest {
 
         //ACT
         val car = Car(licencePlate = "AAA572", dateEnter = date)
-        
+
         //ASSERT
         assertNotNull(car)
     }

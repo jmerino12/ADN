@@ -1,6 +1,6 @@
-package com.example.domain.entities
+package com.example.domain.vehicle.entities
 
-import com.example.domain.exceptions.InvalidDataException
+import com.example.domain.shared.exceptions.InvalidDataException
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit

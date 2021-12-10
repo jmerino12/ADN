@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.adn.common.Resource
-import com.example.domain.entities.Car
+import com.example.domain.vehicle.entities.Car
 import com.example.usecases.GetCars
 import com.example.usecases.PayCarParking
 import com.example.usecases.SaveCar
