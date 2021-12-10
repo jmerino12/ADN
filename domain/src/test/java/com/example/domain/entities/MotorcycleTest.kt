@@ -1,6 +1,5 @@
 package com.example.domain.entities
 
-import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import java.time.LocalDateTime
@@ -23,9 +22,9 @@ class MotorcycleTest {
             cylinderCapacity = 400.0
         )
         // ACT
-        val result = motorcycle.isCylinderCapacityMore500()
+        val result = motorcycle.cylinderCapacity <= 500
         //Assert
-        assertFalse(result)
+        assertTrue(result)
     }
 
     @Test
@@ -41,7 +40,7 @@ class MotorcycleTest {
         )
 
         // ACT
-        val result = motorcycle.isCylinderCapacityMore500()
+        val result = motorcycle.cylinderCapacity >= 500
         //Assert
         assertTrue(result)
     }
@@ -59,7 +58,7 @@ class MotorcycleTest {
         )
 
         // ACT
-        val result = motorcycle.isCylinderCapacityMore500()
+        val result = motorcycle.cylinderCapacity >= 500
         //Assert
         assertTrue(result)
     }
