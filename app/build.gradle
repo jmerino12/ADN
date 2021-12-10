@@ -46,7 +46,7 @@ jacoco {
 dependencies {
     implementation project(':infrastructure')
     implementation project(':domain')
-    implementation project(':usecases')
+    implementation project(':usecase')
     implementation androidLibs.values()
     implementation 'androidx.test.espresso:espresso-contrib:3.4.0'
     kapt androidKaptLibs.values()

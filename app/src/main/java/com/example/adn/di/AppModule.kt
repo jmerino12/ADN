@@ -2,10 +2,12 @@ package com.example.adn.di
 
 import android.app.Application
 import androidx.room.Room
-import com.example.domain.repositories.CarRepository
-import com.example.domain.repositories.MotorcycleRepository
+import com.example.domain.entities.Car
+import com.example.domain.entities.Motorcycle
+import com.example.domain.repositories.VehicleRepository
 import com.example.infraestructure.database.AppDatabase
-import com.example.infraestructure.database.RoomDataSource
+import com.example.infraestructure.database.RoomDataSourceCar
+import com.example.infraestructure.database.RoomDataSourceMotorcycle
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -22,10 +24,10 @@ class AppModule {
     ).build()
 
     @Provides
-    fun motorcycleDataSourceProvider(db: AppDatabase): MotorcycleRepository =
-        RoomDataSource(db)
+    fun motorcycleDataSourceProvider(db: AppDatabase): VehicleRepository<Motorcycle> =
+        RoomDataSourceMotorcycle(db)
 
     @Provides
-    fun carDataSourceProvider(db: AppDatabase): CarRepository =
-        RoomDataSource(db)
+    fun carDataSourceProvider(db: AppDatabase): VehicleRepository<Car> =
+        RoomDataSourceCar(db)
 }

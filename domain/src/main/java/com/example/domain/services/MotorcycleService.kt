@@ -1,19 +1,19 @@
 package com.example.domain.services
 
 import com.example.domain.entities.Motorcycle
-import com.example.domain.repositories.MotorcycleRepository
+import com.example.domain.repositories.VehicleRepository
 
-class MotorcycleService(private val motorcycleRepository: MotorcycleRepository) {
+class MotorcycleService(private val motorcycleRepository: VehicleRepository<Motorcycle>) {
 
     suspend fun saveMotorcycle(motorcycle: Motorcycle) {
-        motorcycleRepository.saveMotorcycle(motorcycle)
+        motorcycleRepository.saveVehicle(motorcycle)
     }
 
     suspend fun getMotorcycles(): List<Motorcycle> {
-        return motorcycleRepository.getListMotorcycle()
+        return motorcycleRepository.getVehicles()
     }
 
     suspend fun payParking(motorcycle: Motorcycle) {
-        motorcycleRepository.payParkingMotorcycle(motorcycle)
+        motorcycleRepository.payParking(motorcycle)
     }
 }
