@@ -43,6 +43,47 @@ jacoco {
     toolVersion = "$jacoco_version"
 }
 
+task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest',':domain:testDebugUnitTest','connectedAndroidTest']) {
+    reports {
+        xml.enabled  true
+        html.enabled  true
+    }
+
+    def domainModule = project(':domain')
+
+    def kotlinDebugTree = layout.files("$project.buildDir/tmp/kotlin-classes/debug",
+            "$domainModule.buildDir/tmp/kotlin-classes/debug")
+    def mainSource = layout.files("$project.projectDir/src/main/java", "$domainModule.projectDir/src/main/java")
+    def executionFilesFromConnectedAndroidTest = fileTree(
+            dir: "$buildDir",
+            includes: ["outputs/code_coverage/debugAndroidTest/connected/**coverage.ec"]
+    )
+
+    def executionFileForUnitTestInModule = "$buildDir/outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec"
+    def executionFileForUnitTestInOtherModule = "$domainModule.buildDir/jacoco/testDebugUnitTest.exec"
+
+    def executionFiles = layout.files(
+            executionFilesFromConnectedAndroidTest,
+            executionFileForUnitTestInModule,
+            executionFileForUnitTestInOtherModule
+
+    )
+    sourceDirectories.setFrom(files([mainSource]))
+    classDirectories.setFrom(files([kotlinDebugTree.asFileTree]))
+    executionData.setFrom(executionFiles.asFileTree)
+}
+
+configurations.all{
+    resolutionStrategy {
+        eachDependency { details ->
+            if ('org.jacoco' == details.requested.group) {
+                details.useVersion jacoco_version
+            }
+        }
+    }
+}
+
+
 dependencies {
     implementation project(':infrastructure')
     implementation project(':domain')
