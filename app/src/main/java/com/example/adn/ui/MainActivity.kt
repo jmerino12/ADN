@@ -44,13 +44,14 @@ class MainActivity : AppCompatActivity() {
         }
         setupRecyclerView()
         setupObserverMotorcycle()
+        binding.loading.isIndeterminate = false
     }
 
     private fun setupObserverMotorcycle() {
         viewModelMotorcycle.motorcycle.observe(this, {
             when (it) {
                 is Resource.Loading -> {
-                    binding.loading.visibility = View.VISIBLE
+                    binding.loading.visibility = View.GONE
                 }
                 is Resource.Content -> {
                     if (it.data.isEmpty()) Toast.makeText(
@@ -73,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         viewModelCar.car.observe(this, {
             when (it) {
                 is Resource.Loading -> {
-                    binding.loading.visibility = View.VISIBLE
+                    binding.loading.visibility = View.GONE
                 }
                 is Resource.Content -> {
                     if (it.data.isEmpty()) Toast.makeText(

@@ -20,11 +20,9 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.example.adn.ui.MainActivity
 import org.hamcrest.Matcher
-import org.junit.FixMethodOrder
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.junit.runners.MethodSorters
 import java.util.concurrent.TimeoutException
 
 /**
@@ -32,7 +30,6 @@ import java.util.concurrent.TimeoutException
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(AndroidJUnit4::class)
 class MainActivityInstrumentedTest {
     @get:Rule
@@ -40,7 +37,7 @@ class MainActivityInstrumentedTest {
 
     @Test
 
-    fun t1_saveMotorcycle_fillTextInputAndChooseRadioButtonMotorcycle_success() {
+    fun saveMotorcycleAndPay_fillTextInputAndChooseRadioButtonMotorcycle_success() {
         onView(withId(R.id.rbtnMotorcycle)).perform(click())
 
         // When
@@ -53,21 +50,6 @@ class MainActivityInstrumentedTest {
 
         //Then
         onView(withId(R.id.addVehicle)).perform(click())
-    }
-
-    @Test
-    fun t2_saveCar_fillTextInputAndChooseRadioButtonCar_success() {
-        onView(withId(R.id.rbtnCar)).perform(click())
-        // When
-        onView(withId(R.id.etPlaca)).perform(typeText("PHT768"))
-            .perform(CloseKeyboardAction())
-
-        //Then
-        onView(withId(R.id.addVehicle)).perform(click())
-    }
-
-    @Test
-    fun t3_payParkingMotorcycle_whereMatchWithLicensePlate_success() {
 
         onView(withId(R.id.rbtnMotorcycle)).perform(click())
 
@@ -84,9 +66,16 @@ class MainActivityInstrumentedTest {
             .perform(click())
     }
 
-
     @Test
-    fun t4_payParkingCar_whereMatchWithLicensePlate_success() {
+    fun saveCarAndPayment_fillTextInputAndChooseRadioButtonCar_success() {
+        onView(withId(R.id.rbtnCar)).perform(click())
+        // When
+        onView(withId(R.id.etPlaca)).perform(typeText("PHT768"))
+            .perform(CloseKeyboardAction())
+
+        //Then
+        onView(withId(R.id.addVehicle)).perform(click())
+
         onView(withId(R.id.rbtnCar)).perform(click())
 
         onView(isRoot()).perform(waitForView(R.id.rvVehicles, 5000))
