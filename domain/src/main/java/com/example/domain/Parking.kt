@@ -1,6 +1,5 @@
 package com.example.domain
 
-import com.example.domain.shared.exceptions.InvalidTypeVehicleException
 import com.example.domain.vehicle.entities.Car
 import com.example.domain.vehicle.entities.Motorcycle
 import com.example.domain.vehicle.entities.Vehicle
@@ -16,14 +15,12 @@ class Parking {
     fun isParkingFull(count: Int, vehicle: Vehicle): Boolean {
         return when (vehicle) {
             is Car -> {
-                count >= LIMIT_CAR
+               return count >= LIMIT_CAR
             }
             is Motorcycle -> {
-                count >= LIMIT_MOTORCYCLE
+                return count >= LIMIT_MOTORCYCLE
             }
-            else -> {
-                throw InvalidTypeVehicleException()
-            }
+            else -> false
         }
 
     }
