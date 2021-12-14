@@ -29,20 +29,28 @@ class CarViewModel(
             return _car
         }
 
+    private val _eventMessageError = MutableLiveData<Exception?>()
+    val eventMessageError: MutableLiveData<Exception?>
+        get() = _eventMessageError
+
     private fun getListCar() {
         uiScope.launch {
             try {
                 _car.value = Resource.Content(getCars.invoke())
             } catch (e: Exception) {
-                _car.value = Resource.Error(e)
+                _eventMessageError.value = e
             }
         }
     }
 
     fun saveCar(car: Car) {
         uiScope.launch {
-            saveCar.invoke(car)
-            getListCar()
+            try {
+                saveCar.invoke(car)
+                getListCar()
+            } catch (e: Exception) {
+                _eventMessageError.value = e
+            }
         }
     }
 
@@ -51,6 +59,10 @@ class CarViewModel(
             payCarParking.invoke(car)
             getListCar()
         }
+    }
+
+    fun confirmMessage() {
+        _eventMessageError.value = null
     }
 
     override fun onCleared() {

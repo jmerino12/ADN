@@ -11,8 +11,8 @@ class MotorcycleTest {
 
     @Test
     fun validateisCylinderCapacityMore500_ccLess500_false() {
-        //ARRANGE
 
+        //ARRANGE
         val offSetDateTime = OffsetDateTime.now()
         val date = LocalDateTime.of(2021, Month.DECEMBER, 7, 13, 0).toInstant(offSetDateTime.offset)
             .toEpochMilli()
@@ -21,14 +21,17 @@ class MotorcycleTest {
             dateEnter = date,
             cylinderCapacity = 400.0
         )
+
         // ACT
         val result = motorcycle.cylinderCapacity <= 500
+
         //Assert
         assertTrue(result)
     }
 
     @Test
     fun validateisCylinderCapacityMore500_ccMore500_true() {
+
         //ARRANGE
         val offSetDateTime = OffsetDateTime.now()
         val date = LocalDateTime.of(2021, Month.DECEMBER, 7, 13, 0).toInstant(offSetDateTime.offset)
@@ -41,12 +44,14 @@ class MotorcycleTest {
 
         // ACT
         val result = motorcycle.cylinderCapacity >= 500
-        //Assert
+
+        //ASSERT
         assertTrue(result)
     }
 
     @Test
     fun validateisCylinderCapacityMore500_cc500_true() {
+
         //ARRANGE
         val offSetDateTime = OffsetDateTime.now()
         val date = LocalDateTime.of(2021, Month.DECEMBER, 7, 13, 0).toInstant(offSetDateTime.offset)
@@ -59,7 +64,8 @@ class MotorcycleTest {
 
         // ACT
         val result = motorcycle.cylinderCapacity >= 500
-        //Assert
+
+        //ASSERT
         assertTrue(result)
     }
 }

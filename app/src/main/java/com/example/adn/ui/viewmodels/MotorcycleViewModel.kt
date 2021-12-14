@@ -29,6 +29,10 @@ class MotorcycleViewModel(
             return _motorcycle
         }
 
+    private val _eventMessageError = MutableLiveData<Exception?>()
+    val eventMessageError: MutableLiveData<Exception?>
+        get() = _eventMessageError
+
 
     private fun getListMotorCycle() {
         uiScope.launch {
@@ -36,15 +40,19 @@ class MotorcycleViewModel(
             try {
                 _motorcycle.value = Resource.Content(getMotorcycles.invoke())
             } catch (e: Exception) {
-                _motorcycle.value = Resource.Error(e)
+                _eventMessageError.value = e
             }
         }
     }
 
     fun saveMotorcycle(motorcycle: Motorcycle) {
         uiScope.launch {
-            saveMotorcycle.invoke(motorcycle)
-            getListMotorCycle()
+            try {
+                saveMotorcycle.invoke(motorcycle)
+                getListMotorCycle()
+            } catch (e: Exception) {
+                _eventMessageError.value = e
+            }
         }
     }
 
@@ -53,6 +61,10 @@ class MotorcycleViewModel(
             payMotorcycleParking.invoke(motorcycle)
             getListMotorCycle()
         }
+    }
+
+    fun confirmMessage() {
+        _eventMessageError.value = null
     }
 
     override fun onCleared() {

@@ -25,4 +25,12 @@ class RoomMotorcycleRepository(db: AppDatabase) : VehicleRepository<Motorcycle> 
             vehicleDao.deleteMotorcycle(data.toRoomVehicle())
         }
 
+    override suspend fun existVehicle(data: Motorcycle): Boolean {
+        return vehicleDao.existMotorcycle(data.licencePlate)
+    }
+
+    override suspend fun countVehicleInParking(): Int {
+        return vehicleDao.totalOfMotorcycleInParking()
+    }
+
 }

@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         }
         setupRecyclerView()
         setupObserverMotorcycle()
+        setupErrorMessage()
         binding.loading.isIndeterminate = false
     }
 
@@ -51,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         viewModelMotorcycle.motorcycle.observe(this, {
             when (it) {
                 is Resource.Loading -> {
-                    binding.loading.visibility = View.GONE
+                    binding.loading.visibility = View.VISIBLE
                 }
                 is Resource.Content -> {
                     if (it.data.isEmpty()) Toast.makeText(
@@ -62,15 +63,40 @@ class MainActivity : AppCompatActivity() {
                     adapter.submitList(it.data)
                     binding.loading.visibility = View.GONE
                 }
-                is Resource.Error -> {
+                else -> {
                     binding.loading.visibility = View.GONE
                 }
             }
         })
     }
 
-    private fun setupObserverCar() {
+    private fun setupErrorMessage() {
+        viewModelMotorcycle.eventMessageError.observe(this, {
+            if (it != null) {
+                val errorDialog =
+                    dialogFactory.getDialog(this, MessageFactory.TYPE_ERROR, it.message!!)
+                errorDialog.setPositiveButton("Ok") { dialog, _ ->
+                    viewModelMotorcycle.confirmMessage()
+                    dialog.dismiss()
+                }
+                errorDialog.show()
+            }
+        })
 
+        viewModelCar.eventMessageError.observe(this, {
+            if (it != null) {
+                val errorDialog =
+                    dialogFactory.getDialog(this, MessageFactory.TYPE_ERROR, it.message!!)
+                errorDialog.setPositiveButton("Ok") { dialog, _ ->
+                    viewModelCar.confirmMessage()
+                    dialog.dismiss()
+                }
+                errorDialog.show()
+            }
+        })
+    }
+
+    private fun setupObserverCar() {
         viewModelCar.car.observe(this, {
             when (it) {
                 is Resource.Loading -> {
@@ -86,9 +112,8 @@ class MainActivity : AppCompatActivity() {
                     binding.loading.visibility = View.GONE
 
                 }
-                is Resource.Error -> {
+                else -> {
                     binding.loading.visibility = View.GONE
-
                 }
             }
         })

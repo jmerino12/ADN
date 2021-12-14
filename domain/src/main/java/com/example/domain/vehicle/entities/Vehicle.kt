@@ -11,12 +11,15 @@ abstract class Vehicle(
     val licencePlate: String,
     val dateEnter: Long
 ) {
-    private val REGEX_LICENCE_PLATE = "^[A-Z]{3}+[0-9]{2}[a-zA-Z0-9]\$"
-    private val EXCEPTION_VALIDATE_LICENCE_PLATE = "No tiene el estandar de la placa"
-    private val EXCEPTION_VALIDATE_ENTER = "No tiene permitido el ingreso"
-    private val INTIAL_LICENSE_PLATE = "A"
-    private val DAY_DENIED_SUNDAY = "domingo"
-    private val DAY_DENIED_MONDAY = "lunes"
+    companion object {
+        private const val REGEX_LICENCE_PLATE = "^[A-Z]{3}+[0-9]{2}[a-zA-Z0-9]\$"
+        private const val EXCEPTION_VALIDATE_LICENCE_PLATE = "No tiene el estandar de la placa"
+        private const val EXCEPTION_VALIDATE_ENTER = "No tiene permitido el ingreso"
+        private const val INITIAL_LICENSE_PLATE = "A"
+        private const val DAY_DENIED_SUNDAY = "domingo"
+        private const val DAY_DENIED_MONDAY = "lunes"
+    }
+
 
     init {
         if (!validateLicencePlate()) {
@@ -33,7 +36,7 @@ abstract class Vehicle(
     }
 
     private fun canEnter(dateNow: Long): Boolean {
-        return if (licencePlate[0].equals(INTIAL_LICENSE_PLATE.single(), true)) {
+        return if (licencePlate[0].equals(INITIAL_LICENSE_PLATE.single(), true)) {
             dayDeniedToEnter(dateNow)
         } else {
             true

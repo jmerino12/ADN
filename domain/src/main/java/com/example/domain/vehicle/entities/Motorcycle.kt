@@ -6,10 +6,12 @@ class Motorcycle(
     val cylinderCapacity: Double,
 ) :
     Vehicle(licencePlate = licencePlate, dateEnter = dateEnter) {
+    companion object {
+        private const val VALUE_HOUR_MOTORCYCLE = 500.0
+        private const val VALUE_DAY_MOTORCYCLE = 4000.0
+        private const val CYLINDER_CAPACITY_500 = 500
+    }
 
-    private val VALUE_HOUR_MOTORCYCLE = 500.0
-    private val VALUE_DAY_MOTORCYCLE = 4000.0
-    private val CYLINDER_CAPACITY_500 = 500
 
     override fun payParking(): Double {
         val totalToPay = calculatePaymentParking(
