@@ -16,6 +16,7 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.espresso.util.HumanReadables
 import androidx.test.espresso.util.TreeIterables
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import com.example.adn.ui.MainActivity
 import org.hamcrest.Matcher
@@ -29,13 +30,13 @@ import java.util.concurrent.TimeoutException
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
+@LargeTest
 @RunWith(AndroidJUnit4::class)
 class MainActivityInstrumentedTest {
     @get:Rule
     var mainActivityActivityTestRule = ActivityTestRule(MainActivity::class.java)
 
     @Test
-
     fun saveMotorcycleAndPay_fillTextInputAndChooseRadioButtonMotorcycle_success() {
         onView(withId(R.id.rbtnMotorcycle)).perform(click())
 
