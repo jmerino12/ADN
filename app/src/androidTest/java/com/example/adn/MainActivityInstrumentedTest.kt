@@ -40,7 +40,7 @@ class MainActivityInstrumentedTest {
     fun saveMotorcycleAndPay_fillTextInputAndChooseRadioButtonMotorcycle_success() {
         onView(withId(R.id.rbtnMotorcycle)).perform(click())
 
-        onView(withId(R.id.etPlaca)).perform(typeText("BBC817"))
+        onView(withId(R.id.etPlaca)).perform(scrollTo(), typeText("BBC817"))
             .perform(closeSoftKeyboard())
 
         onView(withId(R.id.etCilindraje)).perform(typeText("400"))
