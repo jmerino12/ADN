@@ -8,6 +8,7 @@ import androidx.test.espresso.PerformException
 import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
 import androidx.test.espresso.action.CloseKeyboardAction
+import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -42,10 +43,10 @@ class MainActivityInstrumentedTest {
 
         // When
         onView(withId(R.id.etPlaca)).perform(typeText("BBC817"))
-            .perform(CloseKeyboardAction())
+            .perform(ViewActions.closeSoftKeyboard())
 
         onView(withId(R.id.etCilindraje)).perform(typeText("400"))
-            .perform(CloseKeyboardAction())
+            .perform(ViewActions.closeSoftKeyboard())
         onView(withId(R.id.rbtnMotorcycle)).perform(click())
 
         //Then
@@ -78,7 +79,6 @@ class MainActivityInstrumentedTest {
 
         onView(withId(R.id.rbtnCar)).perform(click())
 
-        onView(isRoot()).perform(waitForView(R.id.rvVehicles, 5000))
 
         onView(withId(R.id.rvVehicles))
             .perform(
