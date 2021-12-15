@@ -22,8 +22,6 @@ class VehicleServiceTest {
     @Mock
     lateinit var parking: Parking
 
-    @Mock
-    lateinit var vehicleExistsException: VehicleExistsException
 
     lateinit var vehicleService: VehicleService<Motorcycle>
 
