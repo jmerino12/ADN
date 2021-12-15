@@ -8,9 +8,7 @@ import androidx.test.espresso.PerformException
 import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
 import androidx.test.espresso.action.CloseKeyboardAction
-import androidx.test.espresso.action.ViewActions
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.action.ViewActions.typeText
+import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItem
 import androidx.test.espresso.matcher.RootMatchers.isDialog
@@ -41,12 +39,11 @@ class MainActivityInstrumentedTest {
     fun saveMotorcycleAndPay_fillTextInputAndChooseRadioButtonMotorcycle_success() {
         onView(withId(R.id.rbtnMotorcycle)).perform(click())
 
-        // When
         onView(withId(R.id.etPlaca)).perform(typeText("BBC817"))
-            .perform(ViewActions.closeSoftKeyboard())
+            .perform(closeSoftKeyboard())
 
         onView(withId(R.id.etCilindraje)).perform(typeText("400"))
-            .perform(ViewActions.closeSoftKeyboard())
+            .perform(closeSoftKeyboard())
         onView(withId(R.id.rbtnMotorcycle)).perform(click())
 
         //Then
