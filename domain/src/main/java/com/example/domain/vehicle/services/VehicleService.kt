@@ -28,6 +28,6 @@ class VehicleService<T>(
     }
 
     suspend fun payParking(vehicle: T) {
-        repository.payParking(vehicle)
+        return repository.payParking(vehicle)
     }
 }

@@ -34,4 +34,5 @@ android {
 
 dependencies {
     testImplementation testLibs.values()
+    testImplementation  "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
 }
