@@ -90,6 +90,7 @@ dependencies {
     implementation project(':usecase')
     implementation androidLibs.values()
     implementation 'androidx.test.espresso:espresso-contrib:3.4.0'
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
     kapt androidKaptLibs.values()
     testImplementation testLibs.values()
     androidTestImplementation androidTestLibs.values()

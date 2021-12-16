@@ -1,15 +1,16 @@
 package com.example.adn.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.adn.R
-import com.example.adn.common.MessageFactory
-import com.example.adn.common.Resource
-import com.example.adn.common.app
-import com.example.adn.common.getViewModel
+import com.example.adn.common.*
 import com.example.adn.databinding.ActivityMainBinding
 import com.example.adn.ui.viewmodels.CarViewModel
 import com.example.adn.ui.viewmodels.MotorcycleViewModel
@@ -17,6 +18,8 @@ import com.example.adn.ui.viewmodels.VehicleAdapter
 import com.example.domain.vehicle.entities.Car
 import com.example.domain.vehicle.entities.Motorcycle
 import com.example.domain.vehicle.entities.Vehicle
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -44,79 +47,40 @@ class MainActivity : AppCompatActivity() {
         }
         setupRecyclerView()
         setupObserverMotorcycle()
-        setupErrorMessage()
-        binding.loading.isIndeterminate = false
     }
 
     private fun setupObserverMotorcycle() {
-        viewModelMotorcycle.motorcycle.observe(this, {
-            when (it) {
-                is Resource.Loading -> {
-                    binding.loading.visibility = View.VISIBLE
-                }
-                is Resource.Content -> {
-                    if (it.data.isEmpty()) Toast.makeText(
-                        this,
-                        "No hay motos registradas",
-                        Toast.LENGTH_LONG
-                    ).show()
-                    adapter.submitList(it.data)
-                    binding.loading.visibility = View.GONE
-                }
-                else -> {
-                    binding.loading.visibility = View.GONE
-                }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModelMotorcycle.uiState.collect(::updateUi)
             }
-        })
-    }
-
-    private fun setupErrorMessage() {
-        viewModelMotorcycle.eventMessageError.observe(this, {
-            if (it != null) {
-                val errorDialog =
-                    dialogFactory.getDialog(this, MessageFactory.TYPE_ERROR, it.message!!)
-                errorDialog.setPositiveButton("Ok") { dialog, _ ->
-                    viewModelMotorcycle.confirmMessage()
-                    dialog.dismiss()
-                }
-                errorDialog.show()
-            }
-        })
-
-        viewModelCar.eventMessageError.observe(this, {
-            if (it != null) {
-                val errorDialog =
-                    dialogFactory.getDialog(this, MessageFactory.TYPE_ERROR, it.message!!)
-                errorDialog.setPositiveButton("Ok") { dialog, _ ->
-                    viewModelCar.confirmMessage()
-                    dialog.dismiss()
-                }
-                errorDialog.show()
-            }
-        })
+        }
     }
 
     private fun setupObserverCar() {
-        viewModelCar.car.observe(this, {
-            when (it) {
-                is Resource.Loading -> {
-                    binding.loading.visibility = View.GONE
-                }
-                is Resource.Content -> {
-                    if (it.data.isEmpty()) Toast.makeText(
-                        this,
-                        "No hay carros registrados",
-                        Toast.LENGTH_LONG
-                    ).show()
-                    adapter.submitList(it.data)
-                    binding.loading.visibility = View.GONE
+        lifecycleScope.launch {
+            viewModelCar.uiState.collect(::updateUi)
+        }
+    }
 
-                }
-                else -> {
-                    binding.loading.visibility = View.GONE
-                }
+    private fun <T : Vehicle> updateUi(model: UiState<List<T>>) {
+
+        binding.loading.visibility = if (model is UiState.Loading) View.VISIBLE else View.GONE
+
+        when (model) {
+            is UiState.Success -> {
+                if (model.data.isEmpty()) Toast.makeText(
+                    this@MainActivity,
+                    "No hay vehiculos registrados",
+                    Toast.LENGTH_LONG
+                ).show()
+                adapter.submitList(model.data)
             }
-        })
+
+            is UiState.Error -> {
+                Log.e("error", model.error.toString())
+            }
+        }
     }
 
 

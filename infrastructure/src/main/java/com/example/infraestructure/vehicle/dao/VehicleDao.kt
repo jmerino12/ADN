@@ -3,12 +3,13 @@ package com.example.infraestructure.vehicle.dao
 import androidx.room.*
 import com.example.infraestructure.vehicle.entity.Car
 import com.example.infraestructure.vehicle.entity.Motorcycle
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface VehicleDao {
 
     @Query("SELECT * FROM car")
-    suspend fun getAllCars(): List<Car>
+    fun getAllCars(): Flow<List<Car>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertCar(car: Car)
@@ -20,7 +21,7 @@ interface VehicleDao {
     suspend fun totalOfCarsInParking(): Int
 
     @Query("SELECT * FROM motorcycle")
-    suspend fun getAllMotorCycle(): List<Motorcycle>
+    fun getAllMotorCycle(): Flow<List<Motorcycle>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertMotorCycle(motorcycle: Motorcycle)

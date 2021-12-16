@@ -5,6 +5,7 @@ import com.example.domain.shared.exceptions.LimitParkingException
 import com.example.domain.shared.exceptions.VehicleExistsException
 import com.example.domain.vehicle.entities.Vehicle
 import com.example.domain.vehicle.repositories.VehicleRepository
+import kotlinx.coroutines.flow.Flow
 
 class VehicleService<T>(
     private val repository: VehicleRepository<T>,
@@ -23,7 +24,7 @@ class VehicleService<T>(
         }
     }
 
-    suspend fun getVehicles(): List<T> {
+    fun getVehicles(): Flow<List<T>> {
         return repository.getVehicles()
     }
 

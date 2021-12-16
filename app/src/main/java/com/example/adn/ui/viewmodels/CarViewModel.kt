@@ -1,9 +1,9 @@
 package com.example.adn.ui.viewmodels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.example.adn.common.Resource
+import androidx.lifecycle.viewModelScope
+import com.example.adn.common.UiState
 import com.example.domain.vehicle.entities.Car
 import com.example.usecases.GetCars
 import com.example.usecases.PayCarParking
@@ -11,6 +11,9 @@ import com.example.usecases.SaveCar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class CarViewModel(
@@ -22,47 +25,48 @@ class CarViewModel(
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private val _car = MutableLiveData<Resource<List<Car>>>()
-    val car: LiveData<Resource<List<Car>>>
-        get() {
-            if (_car.value == null) getListCar()
-            return _car
-        }
+    private val _uiState = MutableStateFlow<UiState<List<Car>>>(value = UiState.Loading)
+    val uiState: StateFlow<UiState<List<Car>>> = _uiState
 
-    private val _eventMessageError = MutableLiveData<Exception?>()
-    val eventMessageError: MutableLiveData<Exception?>
-        get() = _eventMessageError
+    init {
+        getListCar()
+    }
 
     private fun getListCar() {
-        uiScope.launch {
+        viewModelScope.launch {
+            _uiState.value = UiState.Loading
             try {
-                _car.value = Resource.Content(getCars.invoke())
+                getCars.invoke().collect { vehicles ->
+                    _uiState.value = UiState.Success(vehicles)
+                }
             } catch (e: Exception) {
-                _eventMessageError.value = e
+                _uiState.value = UiState.Error(e)
+                Log.e("MotocycleViewModel", e.toString())
             }
         }
     }
 
     fun saveCar(car: Car) {
         uiScope.launch {
+            _uiState.value = UiState.Loading
             try {
                 saveCar.invoke(car)
-                getListCar()
             } catch (e: Exception) {
-                _eventMessageError.value = e
+                _uiState.value = UiState.Error(e)
+
             }
         }
     }
 
     fun payParking(car: Car) {
         uiScope.launch {
-            payCarParking.invoke(car)
-            getListCar()
+            _uiState.value = UiState.Loading
+            try {
+                payCarParking.invoke(car)
+            } catch (e: Exception) {
+                _uiState.value = UiState.Error(e)
+            }
         }
-    }
-
-    fun confirmMessage() {
-        _eventMessageError.value = null
     }
 
     override fun onCleared() {

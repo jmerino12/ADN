@@ -6,6 +6,8 @@ import com.example.infraestructure.shared.AppDatabase
 import com.example.infraestructure.vehicle.anticorruption.toDomain
 import com.example.infraestructure.vehicle.anticorruption.toRoomVehicle
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
 class RoomMotorcycleRepository(db: AppDatabase) : VehicleRepository<Motorcycle> {
@@ -16,8 +18,8 @@ class RoomMotorcycleRepository(db: AppDatabase) : VehicleRepository<Motorcycle> 
         vehicleDao.insertMotorCycle(data.toRoomVehicle())
     }
 
-    override suspend fun getVehicles(): List<Motorcycle> = withContext(Dispatchers.IO) {
-        vehicleDao.getAllMotorCycle().map { it.toDomain() }
+    override fun getVehicles(): Flow<List<Motorcycle>> {
+        return vehicleDao.getAllMotorCycle().map { it.map { item -> item.toDomain() } }
     }
 
     override suspend fun payParking(data: Motorcycle) =
