@@ -1,7 +1,6 @@
 package com.example.adn.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -75,10 +74,19 @@ class MainActivity : AppCompatActivity() {
             ).show()
             adapter.submitList(model.data)
         } else if (model is UiState.Error) {
-            Log.e("error", model.error.toString())
+            if (model.error != null) {
+                val errorDialog =
+                    dialogFactory.getDialog(this, MessageFactory.TYPE_ERROR, model.error.message!!)
+                errorDialog.setPositiveButton("Ok") { dialog, _ ->
+                    viewModelCar.clearMessageError()
+                    viewModelMotorcycle.clearMessageError()
+                    dialog.dismiss()
+                }
+                errorDialog.show()
+
+            }
         }
     }
-
 
     private fun setupRecyclerView() {
         adapter = VehicleAdapter(::onVehicleClicked)

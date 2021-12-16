@@ -1,6 +1,5 @@
 package com.example.adn.ui.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.adn.common.UiState
@@ -41,7 +40,6 @@ class CarViewModel(
                 }
             } catch (e: Exception) {
                 _uiState.value = UiState.Error(e)
-                Log.e("MotocycleViewModel", e.toString())
             }
         }
     }
@@ -67,6 +65,10 @@ class CarViewModel(
                 _uiState.value = UiState.Error(e)
             }
         }
+    }
+
+    fun clearMessageError() {
+        _uiState.value = UiState.Error(null)
     }
 
     override fun onCleared() {

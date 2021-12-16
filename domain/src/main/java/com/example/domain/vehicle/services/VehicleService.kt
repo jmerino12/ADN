@@ -24,7 +24,7 @@ class VehicleService<T>(
         }
     }
 
-    fun getVehicles(): Flow<List<T>> {
+    suspend fun getVehicles(): Flow<List<T>> {
         return repository.getVehicles()
     }
 

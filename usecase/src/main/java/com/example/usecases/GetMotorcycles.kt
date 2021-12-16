@@ -5,7 +5,7 @@ import com.example.domain.vehicle.services.VehicleService
 import kotlinx.coroutines.flow.Flow
 
 class GetMotorcycles(private val vehicleService: VehicleService<Motorcycle>) {
-    fun invoke(): Flow<List<Motorcycle>> {
+    suspend fun invoke(): Flow<List<Motorcycle>> {
         return vehicleService.getVehicles()
     }
 }

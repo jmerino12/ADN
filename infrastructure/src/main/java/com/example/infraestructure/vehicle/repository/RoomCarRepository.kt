@@ -8,7 +8,6 @@ import com.example.infraestructure.vehicle.anticorruption.toDomain
 import com.example.infraestructure.vehicle.anticorruption.toRoomVehicle
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
 class RoomCarRepository(db: AppDatabase) : VehicleRepository<Car> {
@@ -19,8 +18,8 @@ class RoomCarRepository(db: AppDatabase) : VehicleRepository<Car> {
         vehicleDao.insertCar(data.toRoomVehicle())
     }
 
-    override fun getVehicles(): Flow<List<Car>> {
-        return vehicleDao.getAllCars().map { it.map { item -> item.toDomain() } }
+    override suspend fun getVehicles(): Flow<List<Car>> = withContext(Dispatchers.IO) {
+        vehicleDao.getAllCars().mapIterable { it.toDomain() }
     }
 
     override suspend fun payParking(data: Car) = withContext(Dispatchers.IO) {

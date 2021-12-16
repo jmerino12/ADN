@@ -1,6 +1,7 @@
 package com.example.adn.ui.viewmodels
 
-import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.adn.common.UiState
@@ -28,6 +29,10 @@ class MotorcycleViewModel(
     private val _uiState = MutableStateFlow<UiState<List<Motorcycle>>>(value = UiState.Loading)
     val uiState: StateFlow<UiState<List<Motorcycle>>> = _uiState
 
+    private val _car = MutableLiveData<List<Motorcycle>>()
+    val car: LiveData<List<Motorcycle>> = _car
+
+
     init {
         getMotorcycles()
     }
@@ -41,7 +46,6 @@ class MotorcycleViewModel(
                 }
             } catch (e: Exception) {
                 _uiState.value = UiState.Error(e)
-                Log.e("MotocycleViewModel", e.toString())
             }
         }
 
@@ -69,6 +73,9 @@ class MotorcycleViewModel(
         }
     }
 
+    fun clearMessageError() {
+        _uiState.value = UiState.Error(null)
+    }
 
     override fun onCleared() {
         viewModelJob.cancel()
