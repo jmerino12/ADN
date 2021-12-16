@@ -67,19 +67,15 @@ class MainActivity : AppCompatActivity() {
 
         binding.loading.visibility = if (model is UiState.Loading) View.VISIBLE else View.GONE
 
-        when (model) {
-            is UiState.Success -> {
-                if (model.data.isEmpty()) Toast.makeText(
-                    this@MainActivity,
-                    "No hay vehiculos registrados",
-                    Toast.LENGTH_LONG
-                ).show()
-                adapter.submitList(model.data)
-            }
-
-            is UiState.Error -> {
-                Log.e("error", model.error.toString())
-            }
+        if (model is UiState.Success) {
+            if (model.data.isEmpty()) Toast.makeText(
+                this@MainActivity,
+                "No hay vehiculos registrados",
+                Toast.LENGTH_LONG
+            ).show()
+            adapter.submitList(model.data)
+        } else if (model is UiState.Error) {
+            Log.e("error", model.error.toString())
         }
     }
 
