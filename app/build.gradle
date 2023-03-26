@@ -38,6 +38,7 @@ android {
     buildFeatures {
         viewBinding true
     }
+    ndkVersion '24.0.8215888'
 }
 jacoco {
     toolVersion = "$jacoco_version"

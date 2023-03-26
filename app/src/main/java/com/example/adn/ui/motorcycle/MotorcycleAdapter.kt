@@ -1,4 +1,4 @@
-package com.example.adn.ui
+package com.example.adn.ui.motorcycle
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -10,9 +10,7 @@ import com.example.adn.R
 import com.example.adn.common.BaseViewHolder
 import com.example.adn.common.convertLongToTime
 import com.example.adn.databinding.ItemVehicleBinding
-import com.example.domain.vehicle.entities.Car
 import com.example.domain.vehicle.entities.Motorcycle
-import com.example.domain.vehicle.entities.Vehicle
 
 
 class MotorcycleAdapter(private val listener: (Motorcycle) -> Unit) :

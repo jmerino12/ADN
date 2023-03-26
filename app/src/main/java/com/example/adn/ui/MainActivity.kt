@@ -2,33 +2,19 @@ package com.example.adn.ui
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
 import com.example.adn.R
-import com.example.adn.common.*
+import com.example.adn.common.MessageFactory
 import com.example.adn.databinding.ActivityMainBinding
-import com.example.adn.ui.viewmodels.CarViewModel
-import com.example.adn.ui.viewmodels.MotorcycleViewModel
-import com.example.adn.ui.viewmodels.VehicleAdapter
-import com.example.domain.vehicle.entities.Car
-import com.example.domain.vehicle.entities.Motorcycle
-import com.example.domain.vehicle.entities.Vehicle
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
+import com.example.adn.ui.car.CarFragment
+import com.example.adn.ui.motorcycle.MotorcycleFragment
 
 class MainActivity : AppCompatActivity() {
-
-    private val viewModelCar: CarViewModel by lazy { getViewModel { app.component.carViewModel } }
-    private val viewModelMotorcycle: MotorcycleViewModel by lazy { getViewModel { app.component.motorcycleViewModel } }
-    private lateinit var adapter: VehicleAdapter
     private lateinit var binding: ActivityMainBinding
-    private lateinit var listVehicles: MutableList<Vehicle>
 
     private val dialogFactory = MessageFactory()
+    private var myFragment: Fragment? = null
 
 
     private var rButtonCar: Boolean? = null
@@ -38,113 +24,35 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        listVehicles = ArrayList()
         listenerRadioButton()
 
         binding.addVehicle.setOnClickListener {
             addVehicle()
         }
-        setupRecyclerView()
-        setupObserverMotorcycle()
-    }
 
-    private fun setupObserverMotorcycle() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModelMotorcycle.uiState.collect(::updateUi)
-            }
-        }
-    }
-
-    private fun setupObserverCar() {
-        lifecycleScope.launch {
-            viewModelCar.uiState.collect(::updateUi)
-        }
-    }
-
-    private fun <T : Vehicle> updateUi(model: UiState<List<T>>) {
-
-        binding.loading.visibility = if (model is UiState.Loading) View.VISIBLE else View.GONE
-
-        if (model is UiState.Success) {
-            if (model.data.isEmpty()) Toast.makeText(
-                this@MainActivity,
-                "No hay vehiculos registrados",
-                Toast.LENGTH_LONG
-            ).show()
-            adapter.submitList(model.data)
-        } else if (model is UiState.Error) {
-            if (model.error != null) {
-                val errorDialog =
-                    dialogFactory.getDialog(this, MessageFactory.TYPE_ERROR, model.error.message!!)
-                errorDialog.setPositiveButton("Ok") { dialog, _ ->
-                    viewModelCar.clearMessageError()
-                    viewModelMotorcycle.clearMessageError()
-                    dialog.dismiss()
-                }
-                errorDialog.show()
-
-            }
-        }
-    }
-
-    private fun setupRecyclerView() {
-        adapter = VehicleAdapter(::onVehicleClicked)
-        binding.rvVehicles.layoutManager = LinearLayoutManager(this)
-        binding.rvVehicles.adapter = adapter
-    }
-
-    private fun onVehicleClicked(vehicle: Vehicle) {
-        when (vehicle) {
-            is Car -> {
-                dialogFactory.getDialog(
-                    this,
-                    MessageFactory.TYPE_INFO,
-                    "El precio total a pagar por el parking es de ${vehicle.payParking()}"
-                )
-                    .setPositiveButton("Pagar") { dialog, _ ->
-                        viewModelCar.payParking(vehicle)
-                        dialog.dismiss()
-                    }
-                    .setNegativeButton("Cancelar") { dialog, _ ->
-                        dialog.dismiss()
-                    }
-                    .show()
-            }
-            is Motorcycle -> {
-                dialogFactory.getDialog(
-                    this,
-                    MessageFactory.TYPE_INFO,
-                    "El precio total a pagar por el parking es de ${vehicle.payParking()}"
-                ).setPositiveButton("Pagar") { dialog, _ ->
-                    viewModelMotorcycle.payParking(vehicle)
-                    dialog.dismiss()
-                }
-                    .setNegativeButton("Cancelar") { dialog, _ ->
-                        dialog.dismiss()
-                    }.show()
-            }
-            else -> {
-                throw RuntimeException("tipo de vehiculo no declaradao")
-            }
-        }
+        myFragment = MotorcycleFragment()
+        supportFragmentManager.beginTransaction().replace(binding.fcvVehicles.id, myFragment!!)
+            .addToBackStack(null).commit()
     }
 
     private fun listenerRadioButton() {
         binding.vehicleGroup.setOnCheckedChangeListener { _, checkedId ->
+            myFragment = null
             when (checkedId) {
                 R.id.rbtnMotorcycle -> {
-                    setupObserverMotorcycle()
+                    myFragment = MotorcycleFragment()
                     rButtonMotorcycle = true
                     rButtonCar = false
                 }
                 R.id.rbtnCar -> {
-                    setupObserverCar()
+                    myFragment = CarFragment()
                     rButtonCar = true
                     rButtonMotorcycle = false
                 }
             }
             disableEnableTextInputCylinder(rButtonMotorcycle)
+            supportFragmentManager.beginTransaction().replace(binding.fcvVehicles.id, myFragment!!)
+                .addToBackStack(null).commit()
         }
     }
 
@@ -186,12 +94,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun addCar() {
         try {
-            viewModelCar.saveCar(
-                Car(
-                    binding.etPlaca.text.toString(),
-                    dateEnter = System.currentTimeMillis()
-                )
-            )
+//            viewModelCar.saveCar(
+//                Car(
+//                    binding.etPlaca.text.toString(),
+//                    dateEnter = System.currentTimeMillis()
+//                )
+//            )
         } catch (e: Exception) {
             val errorDialog =
                 dialogFactory.getDialog(this, MessageFactory.TYPE_ERROR, e.message!!)
@@ -201,13 +109,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun addMotorcycle() {
         try {
-            viewModelMotorcycle.saveMotorcycle(
-                Motorcycle(
-                    binding.etPlaca.text.toString(),
-                    dateEnter = System.currentTimeMillis(),
-                    binding.etCilindraje.text.toString().toDouble(),
-                )
-            )
+//            viewModelMotorcycle.saveMotorcycle(
+//                Motorcycle(
+//                    binding.etPlaca.text.toString(),
+//                    dateEnter = System.currentTimeMillis(),
+//                    binding.etCilindraje.text.toString().toDouble(),
+//                )
+//            )
         } catch (e: Exception) {
             val errorDialog =
                 dialogFactory.getDialog(this, MessageFactory.TYPE_ERROR, e.message!!)

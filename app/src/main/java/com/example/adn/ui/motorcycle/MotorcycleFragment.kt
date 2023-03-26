@@ -1,60 +1,90 @@
-package com.example.adn.ui
+package com.example.adn.ui.motorcycle
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.adn.R
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.adn.common.MessageFactory
+import com.example.adn.common.UiState
+import com.example.adn.common.app
+import com.example.adn.common.getViewModel
+import com.example.adn.databinding.FragmentMotorcycleBinding
+import com.example.adn.ui.factory.Creator
+import com.example.adn.ui.factory.MotorcycleAdapterConcrete
+import com.example.adn.ui.viewmodels.MotorcycleViewModel
+import com.example.domain.vehicle.entities.Motorcycle
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [MotorcycleFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class MotorcycleFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var _binding: FragmentMotorcycleBinding? = null
+    private val binding get() = _binding!!
+    private var dialogFactory: MessageFactory? = null
+    private var motorcycleFactory: Creator<Motorcycle>? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private val viewModelMotorcycle: MotorcycleViewModel by lazy { getViewModel { context?.app?.component!!.motorcycleViewModel } }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_motorcycle, container, false)
+    ): View {
+        _binding = FragmentMotorcycleBinding.inflate(inflater, container, false)
+        dialogFactory = MessageFactory()
+        setupRecyclerView()
+        setupObserverMotorcycle()
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MotorcycleFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MotorcycleFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+
+    private fun setupRecyclerView() {
+        motorcycleFactory = MotorcycleAdapterConcrete()
+        binding.rvMotorcycle.layoutManager = LinearLayoutManager(context)
+        binding.rvMotorcycle.adapter = motorcycleFactory!!.renderAdapter()
+    }
+
+    private fun setupObserverMotorcycle() {
+        lifecycleScope.launch {
+            viewModelMotorcycle.uiState.collect(::update)
+        }
+    }
+
+    private fun update(model: UiState<List<Motorcycle>>) {
+        binding.loading.visibility = if (model is UiState.Loading) View.VISIBLE else View.GONE
+
+        if (model is UiState.Success) {
+            if (model.data.isEmpty()) Toast.makeText(
+                context,
+                "No hay vehiculos registrados",
+                Toast.LENGTH_LONG
+            ).show()
+            motorcycleFactory!!.adapter.submitData(model.data)
+        } else if (model is UiState.Error) {
+            if (model.error != null) {
+                val errorDialog =
+                    dialogFactory!!.getDialog(
+                        requireContext(),
+                        MessageFactory.TYPE_ERROR,
+                        model.error.message!!
+                    )
+                errorDialog.setPositiveButton("Ok") { dialog, _ ->
+
+                    viewModelMotorcycle.clearMessageError()
+                    dialog.dismiss()
                 }
+                errorDialog.show()
+
             }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        dialogFactory = null
+        motorcycleFactory = null
+        _binding = null
     }
 }

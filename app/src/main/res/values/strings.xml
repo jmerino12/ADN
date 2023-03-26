@@ -7,4 +7,6 @@
     <string name="tipo_vehiculo">tipo vehiculo</string>
     <string name="motocicleta">Motocicleta</string>
     <string name="carro">Carro</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
