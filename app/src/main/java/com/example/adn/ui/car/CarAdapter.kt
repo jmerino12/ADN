@@ -13,7 +13,7 @@ import com.example.adn.databinding.ItemVehicleBinding
 import com.example.domain.vehicle.entities.Car
 
 class CarAdapter(private val listener: (Car) -> Unit) :
-    ListAdapter<Car, BaseViewHolder<*>>(
+    ListAdapter<Car, BaseViewHolder<Car>>(
         VehicleDiffCallback
     ) {
 
@@ -30,7 +30,7 @@ class CarAdapter(private val listener: (Car) -> Unit) :
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<Car> {
         val viewBinding =
             ItemVehicleBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -41,7 +41,7 @@ class CarAdapter(private val listener: (Car) -> Unit) :
 
     }
 
-    override fun onBindViewHolder(holder: BaseViewHolder<*>, position: Int) {
+    override fun onBindViewHolder(holder: BaseViewHolder<Car>, position: Int) {
         val item = getItem(position)
         when (holder) {
             is CarViewHolder -> holder.bind(item, position)
@@ -49,7 +49,7 @@ class CarAdapter(private val listener: (Car) -> Unit) :
     }
 
 
-    inner class CarViewHolder(
+     class CarViewHolder(
         private val binding: ItemVehicleBinding
     ) :
         BaseViewHolder<Car>(binding.root) {
@@ -64,7 +64,7 @@ class CarAdapter(private val listener: (Car) -> Unit) :
             )
             binding.horaEntrada.text = convertLongToTime(item.dateEnter)
             binding.btnExit.setOnClickListener {
-                listener(item)
+
             }
         }
     }

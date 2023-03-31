@@ -8,10 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.adn.common.MessageFactory
-import com.example.adn.common.UiState
-import com.example.adn.common.app
-import com.example.adn.common.getViewModel
+import com.example.adn.common.*
 import com.example.adn.databinding.FragmentMotorcycleBinding
 import com.example.adn.ui.factory.Creator
 import com.example.adn.ui.factory.MotorcycleAdapterConcrete
@@ -24,7 +21,7 @@ class MotorcycleFragment : Fragment() {
     private var _binding: FragmentMotorcycleBinding? = null
     private val binding get() = _binding!!
     private var dialogFactory: MessageFactory? = null
-    private var motorcycleFactory: Creator<Motorcycle>? = null
+    private var motorcycleFactory: Creator<Motorcycle, BaseViewHolder<Motorcycle>>? = null
 
     private val viewModelMotorcycle: MotorcycleViewModel by lazy { getViewModel { context?.app?.component!!.motorcycleViewModel } }
 

@@ -14,7 +14,7 @@ import com.example.domain.vehicle.entities.Motorcycle
 
 
 class MotorcycleAdapter(private val listener: (Motorcycle) -> Unit) :
-    ListAdapter<Motorcycle, BaseViewHolder<*>>(
+    ListAdapter<Motorcycle, BaseViewHolder<Motorcycle>>(
         VehicleDiffCallback
     ) {
 
@@ -31,7 +31,7 @@ class MotorcycleAdapter(private val listener: (Motorcycle) -> Unit) :
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<Motorcycle> {
         val viewBinding =
             ItemVehicleBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -42,14 +42,12 @@ class MotorcycleAdapter(private val listener: (Motorcycle) -> Unit) :
 
     }
 
-    override fun onBindViewHolder(holder: BaseViewHolder<*>, position: Int) {
+    override fun onBindViewHolder(holder: BaseViewHolder<Motorcycle>, position: Int) {
         val item = getItem(position)
-        when (holder) {
-            is MotorcycleViewHolder -> holder.bind(item, position)
-        }
+        holder.bind(item, position)
     }
 
-    inner class MotorcycleViewHolder(
+     class MotorcycleViewHolder(
         private val binding: ItemVehicleBinding
     ) :
         BaseViewHolder<Motorcycle>(binding.root) {
@@ -65,7 +63,7 @@ class MotorcycleAdapter(private val listener: (Motorcycle) -> Unit) :
             binding.horaEntrada.text = convertLongToTime(item.dateEnter)
             binding.cilindraje.text = item.cylinderCapacity.toString()
             binding.btnExit.setOnClickListener {
-                listener(item)
+
             }
         }
     }

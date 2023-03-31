@@ -8,10 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.adn.common.MessageFactory
-import com.example.adn.common.UiState
-import com.example.adn.common.app
-import com.example.adn.common.getViewModel
+import com.example.adn.common.*
 import com.example.adn.databinding.FragmentCarBinding
 import com.example.adn.ui.factory.CarAdapterConcrete
 import com.example.adn.ui.factory.Creator
@@ -28,7 +25,7 @@ class CarFragment : Fragment() {
     private val binding get() = _binding!!
 
 
-    private var carFactory: Creator<Car>? = null
+    private var carFactory: Creator<Car, BaseViewHolder<Car>>? = null
     private val viewModelCar: CarViewModel by lazy { getViewModel { context?.app?.component!!.carViewModel } }
 
     override fun onCreateView(
